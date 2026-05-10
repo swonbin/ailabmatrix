@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MATRIX AI Lab — 서울외국인학교</title>
+<meta name="description" content="MATRIX AI Lab. A student research community at Seoul Foreign School studying the mathematics, mechanisms, and limits of modern AI." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+/* ============================================================
+   Tokens — calm institutional palette, à la HAI / Anthropic
+   ============================================================ */
+:root {
+  --bg: #fafaf7;
+  --bg-2: #f3f2ec;
+  --surface: #ffffff;
+  --ink: #111111;
+  --ink-2: #3a3a37;
+  --ink-3: #6b6b66;
+  --line: #e6e4dc;
+  --line-2: #d6d3c8;
+  --accent: #c2410c;
+  --accent-soft: #f4e6dc;
+
+  --serif: "Instrument Serif", "Source Serif Pro", "Apple Garamond", Georgia, serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --sans-ko: "Pretendard", "Inter", -apple-system, system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --radius: 2px;
+  --maxw: 1240px;
+  --gutter: clamp(20px, 4vw, 40px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans-ko);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--ink); color: var(--bg); }
+
+img { max-width: 100%; display: block; }
+
+.wrap { width: min(var(--maxw), 100%); margin: 0 auto; padding: 0 var(--gutter); }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow::before {
+  content: "";
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* ============================================================
+   Top bar
+   ============================================================ */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 250, 247, 0.85);
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.brand-mark {
+  width: 22px; height: 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+}
+.brand-mark span { display: block; background: var(--ink); }
+.brand-mark span:nth-child(2) { background: var(--accent); }
+.brand-mark span:nth-child(3) { background: var(--ink-3); }
+.brand-mark span:nth-child(4) { background: var(--ink); }
+
+.brand-name { font-weight: 600; }
+.brand-sep { color: var(--ink-3); margin: 0 4px; }
+.brand-sub { color: var(--ink-3); font-weight: 400; font-size: 13px; }
+
+.nav { display: flex; align-items: center; gap: 28px; }
+.nav a {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  font-weight: 500;
+  transition: color .15s;
+}
+.nav a:hover, .nav a.active { color: var(--ink); }
+
+.lang-toggle {
+  display: inline-flex;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  padding: 2px;
+  background: var(--surface);
+  margin-left: 4px;
+}
+.lang-toggle button {
+  border: 0;
+  background: transparent;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.lang-toggle button.active {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+@media (max-width: 860px) {
+  .nav a:not(.lang-skip) { display: none; }
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero {
+  padding: clamp(60px, 9vw, 120px) 0 clamp(40px, 6vw, 80px);
+  border-bottom: 1px solid var(--line);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: clamp(32px, 6vw, 80px);
+  align-items: end;
+}
+@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(44px, 6.4vw, 92px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-top: 28px;
+  max-width: 14ch;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+
+.hero-side { border-top: 1px solid var(--line); padding-top: 28px; }
+.hero-side p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 42ch;
+  margin-bottom: 28px;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans-ko);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--bg);
+  transition: transform .15s, background .15s, border-color .15s;
+  cursor: pointer;
+}
+.btn:hover { background: #000; transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-2); }
+.btn-ghost:hover { background: var(--bg-2); border-color: var(--ink-3); }
+.btn .arrow { font-family: var(--mono); transition: transform .2s; }
+.btn:hover .arrow { transform: translateX(2px); }
+
+.hero-meta {
+  margin-top: clamp(48px, 8vw, 96px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 20px 0;
+  gap: 24px;
+}
+@media (max-width: 760px) { .hero-meta { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
+.hero-meta dt {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 6px;
+}
+.hero-meta dd {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.1;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+/* ============================================================
+   Section frame
+   ============================================================ */
+section {
+  padding: clamp(64px, 10vw, 120px) 0;
+  border-bottom: 1px solid var(--line);
+}
+.section-head {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  margin-bottom: 56px;
+  align-items: baseline;
+}
+@media (max-width: 760px) {
+  .section-head { grid-template-columns: 1fr; gap: 12px; margin-bottom: 36px; }
+}
+.section-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+}
+.section-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  max-width: 22ch;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+.section-lede {
+  margin-top: 18px;
+  font-size: 17px;
+  color: var(--ink-2);
+  line-height: 1.65;
+  max-width: 60ch;
+}
+.section-lede em { font-style: italic; color: var(--ink); }
+
+/* ============================================================
+   About — principles
+   ============================================================ */
+.principles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+@media (max-width: 760px) { .principles { grid-template-columns: 1fr; } }
+
+.principle {
+  padding: 32px 28px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  transition: background .2s;
+}
+.principle:hover { background: var(--bg-2); }
+.principle .num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  margin-bottom: 18px;
+  display: block;
+}
+.principle h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  letter-spacing: -0.015em;
+}
+.principle p {
+  font-size: 14.5px;
+  color: var(--ink-2);
+  line-height: 1.65;
+}
+
+/* ============================================================
+   Curriculum table
+   ============================================================ */
+.curri-wrap {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+.curri { width: 100%; border-collapse: collapse; }
+.curri thead th {
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+}
+.curri td {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14.5px;
+  color: var(--ink-2);
+  vertical-align: top;
+  transition: background .15s;
+}
+.curri tbody tr:last-child td { border-bottom: 0; }
+.curri tbody tr:hover td { background: var(--bg-2); }
+.curri td.wk {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-3);
+  width: 64px;
+}
+.curri td.topic {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--ink);
+  width: 32%;
+  letter-spacing: -0.01em;
+}
+.curri td.goal { width: 32%; }
+@media (max-width: 760px) {
+  .curri-wrap { overflow-x: auto; }
+  .curri { min-width: 720px; }
+}
+
+/* Cycle pipeline */
+.cycle {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+@media (max-width: 900px) { .cycle { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .cycle { grid-template-columns: 1fr; } }
+.cy-step {
+  padding: 24px 20px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  transition: background .2s;
+}
+.cy-step:last-child { border-right: 0; }
+.cy-step:hover { background: var(--bg-2); }
+.cy-step .step-num {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  margin-bottom: 14px;
+}
+.cy-step .step-name {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.cy-step .step-desc {
+  font-size: 13px;
+  color: var(--ink-3);
+  line-height: 1.55;
+}
+
+/* ============================================================
+   Tracks
+   ============================================================ */
+.tracks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+@media (max-width: 800px) { .tracks { grid-template-columns: 1fr; } }
+.track {
+  padding: 36px 32px;
+  border-right: 1px solid var(--line);
+  transition: background .2s;
+}
+@media (max-width: 800px) {
+  .track { border-right: 0; border-bottom: 1px solid var(--line); }
+  .track:last-child { border-bottom: 0; }
+}
+.track:last-child { border-right: 0; }
+.track:hover { background: var(--bg-2); }
+
+.track .role {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.track h4 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin-bottom: 14px;
+}
+.track p {
+  font-size: 14.5px;
+  color: var(--ink-2);
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+.track ul { list-style: none; border-top: 1px solid var(--line); padding-top: 16px; }
+.track li {
+  font-size: 13px;
+  color: var(--ink-2);
+  padding: 4px 0;
+  display: flex; gap: 10px;
+}
+.track li::before {
+  content: "→";
+  color: var(--ink-3);
+  font-family: var(--mono);
+}
+
+/* ============================================================
+   Library
+   ============================================================ */
+.library {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+@media (max-width: 900px) { .library { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .library { grid-template-columns: 1fr; } }
+
+.lib-card {
+  padding: 28px 26px;
+  background: var(--surface);
+  cursor: pointer;
+  transition: background .2s;
+  display: flex;
+  flex-direction: column;
+  min-height: 230px;
+}
+.lib-card:hover { background: var(--bg-2); }
+
+.lib-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  border: 1px solid var(--line-2);
+  padding: 3px 8px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+  align-self: flex-start;
+}
+.lib-tag.t-paper { color: var(--accent); border-color: var(--accent); }
+.lib-tag.t-talk  { color: var(--ink); }
+.lib-tag.t-build { color: var(--ink-2); }
+
+.lib-card h5 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 10px;
+}
+.lib-desc {
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.6;
+  margin-bottom: auto;
+}
+.lib-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+  border-top: 1px solid var(--line);
+  margin-top: 20px;
+  padding-top: 14px;
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq {
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+.faq details {
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background .2s;
+}
+.faq details:hover { background: var(--bg-2); }
+.faq details > * { padding-left: var(--gutter); padding-right: var(--gutter); }
+.faq summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+";
+  font-family: var(--mono);
+  font-size: 20px;
+  color: var(--ink-3);
+  flex-shrink: 0;
+  transition: transform .2s, color .2s;
+}
+.faq details[open] summary::after { content: "−"; color: var(--accent); }
+.faq details[open] summary { padding-bottom: 8px; }
+.faq p {
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.7;
+  max-width: 70ch;
+  padding-bottom: 24px;
+}
+
+/* ============================================================
+   Recruit / Join
+   ============================================================ */
+.recruit {
+  padding: clamp(64px, 10vw, 120px) 0;
+  background: var(--ink);
+  color: var(--bg);
+  border: 0;
+  position: relative;
+  overflow: hidden;
+}
+.recruit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 0% 0%, rgba(194, 65, 12, 0.18), transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(255,255,255,0.04), transparent 50%);
+  pointer-events: none;
+}
+.recruit-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(32px, 6vw, 80px);
+  align-items: start;
+  position: relative;
+}
+@media (max-width: 900px) { .recruit-grid { grid-template-columns: 1fr; } }
+
+.recruit .eyebrow { color: rgba(255,255,255,0.6); }
+.recruit .eyebrow::before { background: var(--accent); }
+
+.recruit h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(36px, 5vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 24px 0 24px;
+  max-width: 14ch;
+}
+.recruit h2 em { font-style: italic; color: #f4a276; }
+.recruit p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.7);
+  max-width: 48ch;
+  margin-bottom: 24px;
+}
+.recruit .btn { background: var(--bg); color: var(--ink); border-color: var(--bg); }
+.recruit .btn:hover { background: #fff; }
+.recruit .btn-ghost {
+  background: transparent;
+  color: var(--bg);
+  border-color: rgba(255,255,255,0.3);
+}
+.recruit .btn-ghost:hover { background: rgba(255,255,255,0.06); }
+
+.schedule { border-top: 1px solid rgba(255,255,255,0.18); }
+.sch-row {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  align-items: baseline;
+}
+.sch-time {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #f4a276;
+}
+.sch-content {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.sch-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  text-align: right;
+}
+@media (max-width: 600px) {
+  .sch-row { grid-template-columns: 1fr; gap: 4px; }
+  .sch-note { text-align: left; }
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+footer {
+  padding: 60px 0 40px;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+.foot-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 56px;
+}
+@media (max-width: 800px) { .foot-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+@media (max-width: 480px) { .foot-grid { grid-template-columns: 1fr; } }
+
+.foot-brand h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: -0.015em;
+  margin-bottom: 10px;
+}
+.foot-brand p {
+  font-size: 13.5px;
+  color: var(--ink-3);
+  line-height: 1.6;
+  max-width: 36ch;
+}
+.foot-col h6 {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 14px;
+}
+.foot-col ul { list-style: none; }
+.foot-col li { padding: 4px 0; font-size: 13.5px; }
+.foot-col a { color: var(--ink-2); transition: color .15s; }
+.foot-col a:hover { color: var(--accent); }
+
+.colophon {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   Reveal
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   Language switching
+   ============================================================ */
+html[lang="ko"] [data-lang="en"] { display: none; }
+html[lang="en"] [data-lang="ko"] { display: none; }
+
+/* Block-level pairs */
+.lang-block { display: block; }
+html[lang="ko"] .lang-en { display: none; }
+html[lang="en"] .lang-ko { display: none; }
+
+/* When EN is active, prefer Inter for headings/body */
+html[lang="en"] body { font-family: var(--sans); }
+</style>
+</head>
+<body>
+
+<!-- ======================== TOP BAR ======================== -->
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark"><span></span><span></span><span></span><span></span></span>
+      <span class="brand-name">MATRIX AI Lab</span>
+      <span class="brand-sep">·</span>
+      <span class="brand-sub">
+        <span data-lang="ko">서울외국인학교</span>
+        <span data-lang="en">Seoul Foreign School</span>
+      </span>
+    </a>
+    <nav class="nav">
+      <a href="#about"><span data-lang="ko">소개</span><span data-lang="en">About</span></a>
+      <a href="#curriculum"><span data-lang="ko">커리큘럼</span><span data-lang="en">Curriculum</span></a>
+      <a href="#tracks"><span data-lang="ko">트랙</span><span data-lang="en">Tracks</span></a>
+      <a href="#library"><span data-lang="ko">라이브러리</span><span data-lang="en">Library</span></a>
+      <a href="#faq">FAQ</a>
+      <div class="lang-toggle lang-skip" role="group" aria-label="Language">
+        <button id="btn-ko" class="active">KO</button>
+        <button id="btn-en">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ======================== HERO ======================== -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">
+          <span data-lang="ko">학생 주도 AI 연구 커뮤니티</span>
+          <span data-lang="en">Student-led AI research community</span>
+        </span>
+
+        <h1>
+          <span class="lang-ko lang-block">모델을 쓰는 학생에서,<br><em>이해하고 만드는</em><br>학생으로.</span>
+          <span class="lang-en lang-block">From students who <em>use</em> models<br>to students who <em>understand</em><br>and build them.</span>
+        </h1>
+      </div>
+
+      <aside class="hero-side">
+        <p>
+          <span data-lang="ko">MATRIX AI Lab은 서울외국인학교(SFS)의 AI 연구·빌드 커뮤니티입니다. 우리는 모델의 수학, 메커니즘, 가정, 한계를 함께 읽고, 실험하고, 공개적으로 설명합니다.</span>
+          <span data-lang="en">MATRIX AI Lab is a student research community at Seoul Foreign School. We read, experiment with, and publicly explain the mathematics, mechanisms, and limits of modern AI.</span>
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn" href="#join">
+            <span data-lang="ko">학기 모집 지원</span>
+            <span data-lang="en">Apply this term</span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="btn btn-ghost" href="#curriculum">
+            <span data-lang="ko">커리큘럼 보기</span>
+            <span data-lang="en">View curriculum</span>
+          </a>
+        </div>
+      </aside>
+    </div>
+
+    <dl class="hero-meta">
+      <div>
+        <dt><span data-lang="ko">설립</span><span data-lang="en">Founded</span></dt>
+        <dd>2026</dd>
+      </div>
+      <div>
+        <dt><span data-lang="ko">소속</span><span data-lang="en">Affiliation</span></dt>
+        <dd>SFS</dd>
+      </div>
+      <div>
+        <dt><span data-lang="ko">운영 주기</span><span data-lang="en">Cadence</span></dt>
+        <dd><span data-lang="ko">학기제 · 12주</span><span data-lang="en">Semester · 12 wk</span></dd>
+      </div>
+      <div>
+        <dt><span data-lang="ko">핵심 교재</span><span data-lang="en">Core text</span></dt>
+        <dd>MML &amp; DL</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ======================== ABOUT ======================== -->
+<section id="about">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="section-num">§ 01 / About</div>
+      <div>
+        <h2 class="section-title">
+          <span class="lang-ko lang-block">단순 AI 클럽이 아닌, <em>살아 있는 연구실.</em></span>
+          <span class="lang-en lang-block">Not another club. <em>A working research lab.</em></span>
+        </h2>
+        <p class="section-lede">
+          <span data-lang="ko">현대 AI를 builder의 시선으로 공부합니다. 수학적 기초, transformer 같은 핵심 구조, interpretability와 alignment 같은 현재적 질문을 함께 다룹니다. 학교의 learning, excellence, service 가치를 한 사이클 안에 묶어 — 질문이 발표로, 발표가 아카이브로 이어지게 만듭니다.</span>
+          <span data-lang="en">We study modern AI from a builder’s perspective: mathematical foundations, core architectures like the transformer, and present-day questions of interpretability and alignment. The cycle binds together the school’s values of learning, excellence, and service — questions become talks, and talks become an archive.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="principles">
+      <article class="principle">
+        <span class="num">01 / Principle</span>
+        <h3><span data-lang="ko">설명한다</span><span data-lang="en">We explain.</span></h3>
+        <p><span data-lang="ko">수학을 끝까지 따라간다. “직관이 그렇대요”에서 멈추지 않고, 변수와 가정과 실패 모드까지 적는다.</span><span data-lang="en">We follow the mathematics through to the end. We do not stop at "the intuition is roughly this"; we write down the variables, the assumptions, and the failure modes.</span></p>
+      </article>
+      <article class="principle">
+        <span class="num">02 / Principle</span>
+        <h3><span data-lang="ko">읽는다</span><span data-lang="en">We read the source.</span></h3>
+        <p><span data-lang="ko">요약본 대신 원문 논문을 펼친다. 고전부터 최신까지, 함께 줄을 긋고 함께 의심한다.</span><span data-lang="en">We open the original papers instead of summaries. From canonical to current, we annotate together and we doubt together.</span></p>
+      </article>
+      <article class="principle">
+        <span class="num">03 / Principle</span>
+        <h3><span data-lang="ko">검증한다</span><span data-lang="en">We verify.</span></h3>
+        <p><span data-lang="ko">아이디어는 baseline과 비교 실험으로만 살아남는다. 실패 사례도 결과의 일부로 기록한다.</span><span data-lang="en">An idea survives only against a baseline and a controlled comparison. Failure cases are recorded as part of the result.</span></p>
+      </article>
+      <article class="principle">
+        <span class="num">04 / Principle</span>
+        <h3><span data-lang="ko">남긴다</span><span data-lang="en">We leave a record.</span></h3>
+        <p><span data-lang="ko">발표, 글, 저장소, 라이선스. 학기마다 “끝까지 완성한 것”을 이름과 함께 공개한다.</span><span data-lang="en">Talks, writeups, repositories, licenses. Every semester we publish at least one finished piece of work, attributed by name.</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== CURRICULUM ======================== -->
+<section id="curriculum">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="section-num">§ 02 / Curriculum</div>
+      <div>
+        <h2 class="section-title">
+          <span class="lang-ko lang-block">한 학기, 12주.<br><em>질문에서 시작해 기록으로 끝난다.</em></span>
+          <span class="lang-en lang-block">One semester. Twelve weeks.<br><em>From question to public record.</em></span>
+        </h2>
+        <p class="section-lede">
+          <span data-lang="ko">핵심 교재는 <em>Mathematics for Machine Learning</em>, 보조 교재는 <em>Deep Learning</em>. 뒤쪽 축으로 transformer, interpretability, alignment를 붙여 클럽 정체성을 선명하게 만듭니다.</span>
+          <span data-lang="en">Core text is <em>Mathematics for Machine Learning</em>; supporting text is <em>Deep Learning</em>. Transformer, interpretability, and alignment anchor the second half of the cycle.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="curri-wrap">
+      <table class="curri">
+        <thead>
+          <tr id="curri-head"></tr>
+        </thead>
+        <tbody id="curri-body"></tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:48px;">
+      <span class="eyebrow">
+        <span data-lang="ko">학기 사이클</span><span data-lang="en">Semester cycle</span>
+      </span>
+      <h3 style="font-family:var(--serif); font-weight:400; font-size:clamp(24px,3vw,32px); letter-spacing:-0.015em; margin:14px 0 24px; line-height:1.1;">
+        Foundations → Reading → Build → Symposium → Archive
+      </h3>
+    </div>
+
+    <div class="cycle">
+      <div class="cy-step">
+        <div class="step-num">01 / Inflow</div>
+        <div class="step-name"><span data-lang="ko">유입</span><span data-lang="en">Inflow</span></div>
+        <div class="step-desc"><span data-lang="ko">관심 학생 모집 및 페어링</span><span data-lang="en">Onboarding and pairing</span></div>
+      </div>
+      <div class="cy-step">
+        <div class="step-num">02 / Foundations</div>
+        <div class="step-name"><span data-lang="ko">기초</span><span data-lang="en">Foundations</span></div>
+        <div class="step-desc"><span data-lang="ko">수학과 모형 직관</span><span data-lang="en">Math and model intuitions</span></div>
+      </div>
+      <div class="cy-step">
+        <div class="step-num">03 / Reading</div>
+        <div class="step-name"><span data-lang="ko">리딩</span><span data-lang="en">Reading</span></div>
+        <div class="step-desc"><span data-lang="ko">원문 논문 정독</span><span data-lang="en">Close-reading source papers</span></div>
+      </div>
+      <div class="cy-step">
+        <div class="step-num">04 / Build</div>
+        <div class="step-name"><span data-lang="ko">빌드</span><span data-lang="en">Build</span></div>
+        <div class="step-desc"><span data-lang="ko">실험과 baseline 비교</span><span data-lang="en">Baselines and experiments</span></div>
+      </div>
+      <div class="cy-step">
+        <div class="step-num">05 / Symposium</div>
+        <div class="step-name"><span data-lang="ko">심포지엄</span><span data-lang="en">Symposium</span></div>
+        <div class="step-desc"><span data-lang="ko">공개 발표 및 피드백</span><span data-lang="en">Public talks and feedback</span></div>
+      </div>
+      <div class="cy-step">
+        <div class="step-num">06 / Archive</div>
+        <div class="step-name"><span data-lang="ko">아카이브</span><span data-lang="en">Archive</span></div>
+        <div class="step-desc"><span data-lang="ko">Library에 영구 보존</span><span data-lang="en">Permanent record in Library</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== TRACKS ======================== -->
+<section id="tracks">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="section-num">§ 03 / Tracks</div>
+      <div>
+        <h2 class="section-title">
+          <span class="lang-ko lang-block">세 갈래 길.<br><em>모두에게 다른 깊이.</em></span>
+          <span class="lang-en lang-block">Three tracks.<br><em>A different depth for each.</em></span>
+        </h2>
+        <p class="section-lede">
+          <span data-lang="ko">평가는 출석이 아닌 — 개념의 명료함, 실험의 재현성, 근거 제시, 설명력으로 합니다. 정원은 트랙으로 강도를 조절합니다.</span>
+          <span data-lang="en">We assess on conceptual clarity, reproducibility of experiments, evidence offered, and clarity of explanation — not attendance. Tracks let us scale the intensity rather than cap headcount.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="tracks">
+      <article class="track">
+        <div class="role">Track 01</div>
+        <h4>Listener</h4>
+        <p><span data-lang="ko">먼저 듣고, 질문하고, 함께 푼다. 코딩 경험은 필요 없다. 호기심과 꾸준함이 첫 자격이다.</span><span data-lang="en">Listen first, ask, solve together. No coding experience required. Curiosity and consistency are the first qualifications.</span></p>
+        <ul>
+          <li><span data-lang="ko">주간 Reading Circle 참석</span><span data-lang="en">Weekly Reading Circle</span></li>
+          <li><span data-lang="ko">Question Log 기여</span><span data-lang="en">Contribute to the Question Log</span></li>
+          <li><span data-lang="ko">학기 1회 짧은 코멘터리 글</span><span data-lang="en">One short commentary per term</span></li>
+        </ul>
+      </article>
+
+      <article class="track">
+        <div class="role">Track 02</div>
+        <h4>Builder</h4>
+        <p><span data-lang="ko">학기당 최소 1개의 공개 산출물을 만든다. notebook, demo, mini benchmark, 아카이브 글 모두 가능.</span><span data-lang="en">One public artifact per semester, minimum. Notebooks, demos, mini-benchmarks, or archive essays all qualify.</span></p>
+        <ul>
+          <li><span data-lang="ko">Build Day 운영</span><span data-lang="en">Help run Build Day</span></li>
+          <li><span data-lang="ko">Repository 가이드라인 준수</span><span data-lang="en">Follow CONTRIBUTING and license norms</span></li>
+          <li><span data-lang="ko">Symposium lightning talk</span><span data-lang="en">Lightning talk at Symposium</span></li>
+        </ul>
+      </article>
+
+      <article class="track">
+        <div class="role">Track 03</div>
+        <h4>Researcher</h4>
+        <p><span data-lang="ko">학기 단위 프로젝트, 보고서, 발표를 묶어 낸다. 멘토링, 재현 실험, peer review가 기본 단위.</span><span data-lang="en">A semester-long project bundled with a report and a talk. Mentoring, replication, and peer review are the units of work.</span></p>
+        <ul>
+          <li><span data-lang="ko">학기 프로젝트 1건</span><span data-lang="en">One semester project</span></li>
+          <li><span data-lang="ko">1,000–1,500자 보고서</span><span data-lang="en">1,000–1,500 word report</span></li>
+          <li><span data-lang="ko">Symposium full talk</span><span data-lang="en">Full talk at Symposium</span></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== LIBRARY ======================== -->
+<section id="library">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="section-num">§ 04 / Library</div>
+      <div>
+        <h2 class="section-title">
+          <span class="lang-ko lang-block">학습은 사라지지 않고, <em>이름과 함께 남는다.</em></span>
+          <span class="lang-en lang-block">Learning does not vanish. <em>It stays, attributed.</em></span>
+        </h2>
+        <p class="section-lede">
+          <span data-lang="ko">모든 게시물에 저자, 날짜, 버전, 원문, 라이선스를 표기합니다. 짧게 인용하고 길게 설명합니다. 그림은 라이선스가 허용될 때만 재사용합니다.</span>
+          <span data-lang="en">Every entry carries author, date, version, source, and license. We quote briefly and explain at length. Figures are re-used only where the license allows.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="library">
+      <article class="lib-card">
+        <span class="lib-tag t-talk">Talk</span>
+        <h5><span data-lang="ko">왜 Attention이 이겼는가</span><span data-lang="en">Why Attention Won</span></h5>
+        <p class="lib-desc"><span data-lang="ko">recurrence 없이 attention만으로 더 병렬적이고 학습 효율적인 구조를 만든 이유를 수학 직관으로 설명한다.</span><span data-lang="en">How attention alone, without recurrence, produced a more parallel and trainable architecture — explained from the math up.</span></p>
+        <div class="lib-meta"><span>D. Suh / W. Lee</span><span>v0.1 · 2026</span></div>
+      </article>
+
+      <article class="lib-card">
+        <span class="lib-tag t-talk">Talk</span>
+        <h5><span data-lang="ko">Momentum은 왜 실제로 작동하는가</span><span data-lang="en">Why Momentum Really Works</span></h5>
+        <p class="lib-desc"><span data-lang="ko">"빨라지는 공" 비유에서 끝내지 않고, curvature와 step-size 관점으로 다시 설명한다.</span><span data-lang="en">Past the "rolling ball" intuition, into curvature and step-size — what the optimizer is really doing.</span></p>
+        <div class="lib-meta"><span>Reading Circle</span><span>v0.1 · 2026</span></div>
+      </article>
+
+      <article class="lib-card">
+        <span class="lib-tag t-talk">Talk</span>
+        <h5><span data-lang="ko">Alignment는 성능과 다른 문제인가</span><span data-lang="en">Is Alignment Distinct from Capability?</span></h5>
+        <p class="lib-desc"><span data-lang="ko">harmlessness, self-critique, AI feedback. "잘하는 모델"과 "통제되는 모델" 사이의 거리.</span><span data-lang="en">Harmlessness, self-critique, AI feedback — the distance between a capable model and a steerable one.</span></p>
+        <div class="lib-meta"><span>Symposium</span><span>v0.1 · 2026</span></div>
+      </article>
+
+      <article class="lib-card">
+        <span class="lib-tag t-build">Build</span>
+        <h5><span data-lang="ko">한국어 높임말 일관성 벤치마크</span><span data-lang="en">Korean Honorific Consistency Benchmark</span></h5>
+        <p class="lib-desc"><span data-lang="ko">여러 프롬프트 상황에서 존댓말과 반말 안정성을 측정하는 mini benchmark. 한국어 LLM 평가의 빈자리를 채우는 시도.</span><span data-lang="en">A small benchmark measuring honorific stability of LLMs across prompt conditions — filling a gap in Korean-language evaluation.</span></p>
+        <div class="lib-meta"><span>Builder Track</span><span>WIP</span></div>
+      </article>
+
+      <article class="lib-card">
+        <span class="lib-tag t-build">Build</span>
+        <h5><span data-lang="ko">수학 오답 분석 튜터</span><span data-lang="en">Math Error-Analysis Tutor</span></h5>
+        <p class="lib-desc"><span data-lang="ko">학생 풀이를 오류 유형으로 태깅하고, 다음 공부 행동을 추천한다. SFS 내부 사용을 가정한 작은 도구.</span><span data-lang="en">Tags student solutions by error type and suggests the next study step. A small tool, scoped for use inside SFS.</span></p>
+        <div class="lib-meta"><span>Researcher Track</span><span>WIP</span></div>
+      </article>
+
+      <article class="lib-card">
+        <span class="lib-tag t-build">Build</span>
+        <h5><span data-lang="ko">Library 자동 발행 파이프라인</span><span data-lang="en">Library Auto-Publish Pipeline</span></h5>
+        <p class="lib-desc"><span data-lang="ko">발표 슬라이드, 영상, 요약문을 한 번에 게시물로 변환하는 내부 자동화. 우리 사이트 자체가 첫 사용자.</span><span data-lang="en">Internal automation that turns slides, video, and a writeup into a single publishable entry. Our own site is the first user.</span></p>
+        <div class="lib-meta"><span>Media / Web</span><span>v0.0.3</span></div>
+      </article>
+
+      <article class="lib-card">
+        <span class="lib-tag t-paper">Paper</span>
+        <h5><span data-lang="ko">Attention Is All You Need 해설</span><span data-lang="en">Annotated: Attention Is All You Need</span></h5>
+        <p class="lib-desc"><span data-lang="ko">self-attention, positional encoding, multi-head attention을 중고등학생 눈높이로 다시 설명한다. 원문과 함께 읽기를 권한다.</span><span data-lang="en">Self-attention, positional encoding, and multi-head attention — re-explained for high-school readers, paired with the original paper.</span></p>
+        <div class="lib-meta"><span>Vaswani et al., 2017</span><span>arXiv:1706.03762</span></div>
+      </article>
+
+      <article class="lib-card">
+        <span class="lib-tag t-paper">Paper</span>
+        <h5>Understanding RL Vision</h5>
+        <p class="lib-desc"><span data-lang="ko">attribution과 interpretability의 입문 글. 내부 표현이 어떻게 의사결정을 만드는지 시각적으로 따라간다.</span><span data-lang="en">An entry point to attribution and interpretability — tracing how internal representations produce decisions.</span></p>
+        <div class="lib-meta"><span>Distill, 2020</span><span>distill.pub</span></div>
+      </article>
+
+      <article class="lib-card">
+        <span class="lib-tag t-paper">Paper</span>
+        <h5><span data-lang="ko">Constitutional AI 해설</span><span data-lang="en">Annotated: Constitutional AI</span></h5>
+        <p class="lib-desc"><span data-lang="ko">alignment와 oversight의 대표 입문. 사람의 라벨 없이 AI feedback으로 harmlessness를 학습시키는 절차를 따라가 본다.</span><span data-lang="en">A walk-through of training harmlessness from AI feedback, without human labels — a canonical entry point to alignment.</span></p>
+        <div class="lib-meta"><span>Anthropic, 2022</span><span>anthropic.com</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FAQ ======================== -->
+<section id="faq" style="padding-bottom:0;">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="section-num">§ 05 / FAQ</div>
+      <div>
+        <h2 class="section-title"><span data-lang="ko">자주 받는 질문</span><span data-lang="en">Frequently asked</span></h2>
+        <p class="section-lede"><span data-lang="ko">엘리트 선발 모임이 아니라, 지적 호기심 기반 참여 모임입니다.</span><span data-lang="en">This is not a selective elite group. It is a participation-based community grounded in curiosity.</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq">
+    <div class="wrap" style="padding:0;">
+      <details>
+        <summary><span data-lang="ko">코딩 경험이 없어도 되나요?</span><span data-lang="en">Do I need coding experience?</span></summary>
+        <p><span data-lang="ko">됩니다. 첫 축은 코딩 숙련이 아니라 선형대수, 확률, 최적화, 모델 직관입니다. 공개 교재도 이 순서를 취합니다. Listener 트랙은 코드를 한 줄도 쓰지 않고도 의미 있게 기여할 수 있도록 설계했습니다.</span><span data-lang="en">No. The first axis is not coding fluency but linear algebra, probability, optimization, and model intuition — the order canonical textbooks themselves follow. The Listener track is designed so a member can contribute meaningfully without writing a single line of code.</span></p>
+      </details>
+      <details>
+        <summary><span data-lang="ko">수학을 아주 잘해야 하나요?</span><span data-lang="en">Do I need to be strong at math?</span></summary>
+        <p><span data-lang="ko">완성된 실력보다 꾸준한 질문이 더 중요합니다. 다만 벡터, 함수, 확률에 대한 기초는 학기 초 Foundations에서 함께 다집니다. 현재 학년에서 막힌 부분이 있어도 괜찮습니다.</span><span data-lang="en">Steady questions matter more than finished skill. We rebuild the basics of vectors, functions, and probability together during Foundations. It is fine to be stuck on something from your current grade.</span></p>
+      </details>
+      <details>
+        <summary><span data-lang="ko">발표는 꼭 해야 하나요?</span><span data-lang="en">Is presenting required?</span></summary>
+        <p><span data-lang="ko">예. MATRIX의 최소 단위는 "이해했다"가 아니라 "설명했다"입니다. clear explanation 자체가 연구 문화의 일부라고 봅니다. 발표 길이는 트랙별로 다릅니다 — Listener는 5분 코멘터리, Researcher는 8분 full talk.</span><span data-lang="en">Yes. The minimal unit at MATRIX is not "I understood it" but "I explained it." We treat clear explanation as part of the research culture itself. Length scales with track — five-minute commentary for Listener, eight-minute talk for Researcher.</span></p>
+      </details>
+      <details>
+        <summary><span data-lang="ko">결과물의 저작권은 누구에게 있나요?</span><span data-lang="en">Who owns the work?</span></summary>
+        <p><span data-lang="ko">기본은 학생 저자 우선입니다. 사이트 게시 시 저자명, 날짜, 버전, 라이선스를 함께 남깁니다. 타인의 그림이나 전문을 재게시할 때는 별도 허가나 라이선스 확인이 필요합니다. 우리 정책은 "license-first, excerpt-second, repost-never"입니다.</span><span data-lang="en">Student authors retain authorship by default. Each entry carries author, date, version, and license. Reusing another author's figure or full text requires permission or a clear license. Our policy: license-first, excerpt-second, repost-never.</span></p>
+      </details>
+      <details>
+        <summary><span data-lang="ko">대입 포트폴리오로 제출해도 되나요?</span><span data-lang="en">Can I submit this work to college applications?</span></summary>
+        <p><span data-lang="ko">가능합니다. 다만 대학별 정책이 다르므로, 의미 있고 지원 맥락에 직접 관련 있는 작업만 선별해 넣는 편을 권합니다. MIT는 research·maker 포트폴리오를 optional material로 받습니다. 링크는 많을수록 좋은 것이 아니라 강할수록 좋습니다.</span><span data-lang="en">Yes — within each university's policy. We recommend submitting only work that is substantial and directly relevant to your application. MIT, for instance, accepts research and maker portfolios as optional material. Stronger links beat more links.</span></p>
+      </details>
+      <details>
+        <summary><span data-lang="ko">학년 제한이 있나요?</span><span data-lang="en">Are there grade restrictions?</span></summary>
+        <p><span data-lang="ko">SFS High School 전 학년이 지원할 수 있습니다. 9학년은 Listener 트랙으로 시작해 학기마다 트랙을 옮길 수 있습니다. Middle School 학생도 멘토와 함께라면 Reading Circle 일부 세션에 참여할 수 있습니다.</span><span data-lang="en">Open to all of SFS High School. Grade-9 members typically start on the Listener track and can change tracks each semester. Middle School students may join selected Reading Circle sessions when paired with a mentor.</span></p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== JOIN ======================== -->
+<section id="join" class="recruit">
+  <div class="wrap">
+    <div class="recruit-grid">
+      <div>
+        <span class="eyebrow">
+          <span data-lang="ko">2026 봄학기 모집 중</span>
+          <span data-lang="en">Spring 2026 — open</span>
+        </span>
+        <h2>
+          <span class="lang-ko lang-block">코드를 잘 짜는 학생만의<br><em>모임이 아닙니다.</em></span>
+          <span class="lang-en lang-block">Not just for students who<br><em>already write code.</em></span>
+        </h2>
+        <p>
+          <span data-lang="ko">수학으로 구조를 읽고 싶은 학생, 논문을 함께 읽고 싶은 학생, 실제 프로젝트를 만들고 싶은 학생, 질문을 발표와 글로 남기고 싶은 학생 — 그렇다면 누구든 지원할 수 있습니다.</span>
+          <span data-lang="en">Students who want to read structure mathematically, read papers together, build real projects, or turn questions into talks and writing — anyone like that can apply.</span>
+        </p>
+
+        <div class="hero-actions" style="margin-top:32px;">
+          <a class="btn" href="mailto:apply@ailabmatrix.com">
+            apply@ailabmatrix.com
+            <span class="arrow">→</span>
+          </a>
+          <a class="btn btn-ghost" href="#curriculum">
+            <span data-lang="ko">커리큘럼 다시 보기</span>
+            <span data-lang="en">Re-read curriculum</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="schedule">
+        <div class="sch-row">
+          <div class="sch-time">T-2 WK</div>
+          <div class="sch-content"><span data-lang="ko">공고 오픈</span><span data-lang="en">Posting opens</span></div>
+          <div class="sch-note"><span data-lang="ko">웹사이트 · 포스터 · 관심 폼</span><span data-lang="en">Site · poster · form</span></div>
+        </div>
+        <div class="sch-row">
+          <div class="sch-time">WEEK 01</div>
+          <div class="sch-content"><span data-lang="ko">오픈 세션</span><span data-lang="en">Open session</span></div>
+          <div class="sch-note"><span data-lang="ko">30분 샘플 + Q&amp;A</span><span data-lang="en">30-min sample + Q&amp;A</span></div>
+        </div>
+        <div class="sch-row">
+          <div class="sch-time">WK 01–02</div>
+          <div class="sch-content"><span data-lang="ko">지원 접수</span><span data-lang="en">Applications</span></div>
+          <div class="sch-note"><span data-lang="ko">짧은 양식, 질문 2개, 트랙</span><span data-lang="en">Short form, two questions, track</span></div>
+        </div>
+        <div class="sch-row">
+          <div class="sch-time">WEEK 03</div>
+          <div class="sch-content"><span data-lang="ko">온보딩</span><span data-lang="en">Onboarding</span></div>
+          <div class="sch-note"><span data-lang="ko">리딩 리스트, 도구 세팅, 페어링</span><span data-lang="en">Reading list, tools, pairing</span></div>
+        </div>
+        <div class="sch-row">
+          <div class="sch-time">WEEK 04</div>
+          <div class="sch-content"><span data-lang="ko">첫 사이클 시작</span><span data-lang="en">First cycle</span></div>
+          <div class="sch-note"><span data-lang="ko">Foundations + mini Build Day</span><span data-lang="en">Foundations + mini Build Day</span></div>
+        </div>
+        <div class="sch-row">
+          <div class="sch-time">END</div>
+          <div class="sch-content"><span data-lang="ko">심포지엄 · 아카이브</span><span data-lang="en">Symposium · Archive</span></div>
+          <div class="sch-note"><span data-lang="ko">공개 발표, Library 업데이트</span><span data-lang="en">Public talks, Library update</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FOOTER ======================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>MATRIX AI Lab</h3>
+        <p>
+          <span data-lang="ko">서울외국인학교 학생 주도 AI 연구 커뮤니티. 모델의 수학, 메커니즘, 가정, 한계를 함께 읽고, 실험하고, 공개합니다.</span>
+          <span data-lang="en">A student-led AI research community at Seoul Foreign School. We read, experiment with, and publish the mathematics, mechanisms, and limits of modern AI.</span>
+        </p>
+      </div>
+      <div class="foot-col">
+        <h6><span data-lang="ko">사이트</span><span data-lang="en">Site</span></h6>
+        <ul>
+          <li><a href="#about"><span data-lang="ko">소개</span><span data-lang="en">About</span></a></li>
+          <li><a href="#curriculum"><span data-lang="ko">커리큘럼</span><span data-lang="en">Curriculum</span></a></li>
+          <li><a href="#tracks"><span data-lang="ko">트랙</span><span data-lang="en">Tracks</span></a></li>
+          <li><a href="#library"><span data-lang="ko">라이브러리</span><span data-lang="en">Library</span></a></li>
+          <li><a href="#join"><span data-lang="ko">지원</span><span data-lang="en">Apply</span></a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h6><span data-lang="ko">읽을거리</span><span data-lang="en">Reading</span></h6>
+        <ul>
+          <li><a href="https://mml-book.com/" target="_blank" rel="noopener">MML Book</a></li>
+          <li><a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Attention Is All You Need</a></li>
+          <li><a href="https://distill.pub/" target="_blank" rel="noopener">Distill</a></li>
+          <li><a href="https://www.anthropic.com/research" target="_blank" rel="noopener">Anthropic Research</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h6><span data-lang="ko">연락</span><span data-lang="en">Contact</span></h6>
+        <ul>
+          <li><a href="mailto:apply@ailabmatrix.com">apply@ailabmatrix.com</a></li>
+          <li><a href="#">GitHub <span data-lang="ko">(준비 중)</span><span data-lang="en">(forthcoming)</span></a></li>
+          <li><a href="https://www.seoulforeign.org/" target="_blank" rel="noopener">Seoul Foreign School</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="colophon">
+      <span>© 2026 MATRIX AI Lab</span>
+      <span><span data-lang="ko">학생 운영 아카이브 · 서울외국인학교</span><span data-lang="en">A student-run archive at SFS</span></span>
+      <span>v1.0 — 2026.05</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ============================================================
+     Curriculum data — rendered in active language
+     ============================================================ */
+  const curriculum = [
+    { wk: "01",
+      ko: ["Orientation: Builder’s Perspective", "사용자와 builder 시각의 차이 이해", "질문 맵 작성, 관심 트랙 배정"],
+      en: ["Orientation: A Builder’s Perspective", "Distinguish user vs builder framings of AI", "Map questions, assign tracks"] },
+    { wk: "02",
+      ko: ["Linear Algebra I", "벡터, 행렬, 내적, 선형변환", "Foundations + 보드 문제 풀이"],
+      en: ["Linear Algebra I", "Vectors, matrices, inner products, linear maps", "Foundations + chalkboard problems"] },
+    { wk: "03",
+      ko: ["Linear Algebra II", "고유값, 분해, PCA 직관", "Reading Circle + 시각화"],
+      en: ["Linear Algebra II", "Eigenvalues, decompositions, PCA intuition", "Reading Circle + visualizations"] },
+    { wk: "04",
+      ko: ["Vector Calculus", "gradient, partial derivative, chain rule", "유도 연습 + 미니 과제"],
+      en: ["Vector Calculus", "Gradient, partial derivative, chain rule", "Derivation drills + mini-task"] },
+    { wk: "05",
+      ko: ["Probability for ML", "분포, 기대값, likelihood 감각", "오답 분석 + notebook"],
+      en: ["Probability for ML", "Distributions, expectation, likelihood sense", "Error analysis + notebook"] },
+    { wk: "06",
+      ko: ["Optimization", "gradient descent, momentum 직관", "Distill explainer 토론"],
+      en: ["Optimization", "Gradient descent, momentum intuition", "Discussion: Distill explainers"] },
+    { wk: "07",
+      ko: ["Models Meet Data", "train/val/test, baseline 설계", "간단한 예측 모델 구축"],
+      en: ["Models Meet Data", "Train/val/test, designing a baseline", "Build a simple predictive model"] },
+    { wk: "08",
+      ko: ["Neural Networks", "MLP, backprop, loss 설계", "scratch 구현 또는 Colab 실습"],
+      en: ["Neural Networks", "MLPs, backprop, loss design", "From-scratch or Colab implementation"] },
+    { wk: "09",
+      ko: ["Attention & Transformer", "self-attention과 병렬화의 의미", "핵심 논문 읽기 + mini demo"],
+      en: ["Attention & Transformer", "Why self-attention parallelizes", "Read the source paper + mini demo"] },
+    { wk: "10",
+      ko: ["Evaluation & Benchmark", "metric, error analysis, failure mode", "사례 비교, peer review"],
+      en: ["Evaluation & Benchmark", "Metrics, error analysis, failure modes", "Case comparison, peer review"] },
+    { wk: "11",
+      ko: ["Interpretability & Alignment", "내부 표현, attribution, alignment 질문", "Reading Circle + debate"],
+      en: ["Interpretability & Alignment", "Internal representations, attribution, alignment", "Reading Circle + debate"] },
+    { wk: "12",
+      ko: ["Symposium Sprint", "발표·보고서·아카이브 업로드", "공개 발표, 피드백, 반영"],
+      en: ["Symposium Sprint", "Talks, reports, archive uploads", "Public talks, feedback, revision"] },
+  ];
+
+  const headers = {
+    ko: ["주차", "주제", "학습 목표", "활동"],
+    en: ["Week", "Topic", "Learning goal", "Activity"]
+  };
+
+  function renderCurriculum() {
+    const lang = document.documentElement.lang === "en" ? "en" : "ko";
+    document.getElementById("curri-head").innerHTML =
+      headers[lang].map(h => `<th>${h}</th>`).join("");
+    document.getElementById("curri-body").innerHTML =
+      curriculum.map(row => `
+        <tr>
+          <td class="wk">W${row.wk}</td>
+          <td class="topic">${row[lang][0]}</td>
+          <td class="goal">${row[lang][1]}</td>
+          <td class="act">${row[lang][2]}</td>
+        </tr>
+      `).join("");
+  }
+
+  /* ============================================================
+     Language toggle
+     ============================================================ */
+  const btnKo = document.getElementById("btn-ko");
+  const btnEn = document.getElementById("btn-en");
+
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    btnKo.classList.toggle("active", lang === "ko");
+    btnEn.classList.toggle("active", lang === "en");
+    document.title = lang === "ko"
+      ? "MATRIX AI Lab — 서울외국인학교"
+      : "MATRIX AI Lab — Seoul Foreign School";
+    renderCurriculum();
+    try { localStorage.setItem("matrix-lang", lang); } catch(e) {}
+  }
+
+  btnKo.addEventListener("click", () => setLang("ko"));
+  btnEn.addEventListener("click", () => setLang("en"));
+
+  let initial = "ko";
+  try {
+    const saved = localStorage.getItem("matrix-lang");
+    if (saved === "ko" || saved === "en") initial = saved;
+  } catch(e) {}
+  setLang(initial);
+
+  /* ============================================================
+     Reveal on scroll
+     ============================================================ */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add("visible");
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  /* ============================================================
+     Active nav highlight
+     ============================================================ */
+  const sections = ["about","curriculum","tracks","library","faq"]
+    .map(id => document.getElementById(id)).filter(Boolean);
+  const navLinks = document.querySelectorAll(".nav a[href^='#']");
+  const navIo = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
+      }
+    });
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  sections.forEach(s => navIo.observe(s));
+</script>
+
+</body>
+</html>
