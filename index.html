@@ -293,6 +293,13 @@ img { max-width: 100%; display: block; }
   font-style: italic;
   color: var(--accent);
 }
+/* Korean h1 sits one step smaller and wider — Hangul glyphs are squarer
+   than serif Latin, so the same px count crowds the column. */
+html[lang="ko"] .hero h1 {
+  font-size: clamp(38px, 5.6vw, 84px);
+  letter-spacing: -0.025em;
+  max-width: 18ch;
+}
 
 .hero-side {
   border-top: 1px solid var(--ink);
