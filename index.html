@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MATRIX AI Lab — 서울외국인학교</title>
+<title>MATRIX AI Lab · 서울외국인학교</title>
 <meta name="description" content="MATRIX AI Lab. A student research community at Seoul Foreign School studying the mathematics, mechanisms, and limits of modern AI. Mathematics & AI Theory, Research, and Inquiry Exchange." />
-<meta property="og:title" content="MATRIX AI Lab — Seoul Foreign School" />
+<meta property="og:title" content="MATRIX AI Lab · Seoul Foreign School" />
 <meta property="og:description" content="Mathematics & AI Theory, Research, and Inquiry Exchange. A student-led AI research community at SFS." />
 <meta property="og:type" content="website" />
 
@@ -296,9 +296,11 @@ img { max-width: 100%; display: block; }
 /* Korean h1 sits one step smaller and wider — Hangul glyphs are squarer
    than serif Latin, so the same px count crowds the column. */
 html[lang="ko"] .hero h1 {
-  font-size: clamp(38px, 5.6vw, 84px);
-  letter-spacing: -0.025em;
-  max-width: 18ch;
+  font-size: clamp(34px, 4.8vw, 72px);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  max-width: none;
+  word-break: keep-all;
 }
 
 .hero-side {
@@ -1148,6 +1150,731 @@ footer {
 }
 
 /* ============================================================================
+   §02 SELF-APPLYING PHILOSOPHY — TOOL STACK + RECURSION CALLOUT
+   ============================================================================ */
+.tool-stack {
+  margin-top: clamp(40px, 6vw, 64px);
+  border-top: 1px solid var(--ink);
+  padding-top: 32px;
+}
+.tool-stack-head { margin-bottom: 28px; }
+.tool-stack-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+@media (max-width: 900px) { .tool-stack-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .tool-stack-grid { grid-template-columns: 1fr; } }
+.tool-group {
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+.tool-group-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 14px;
+}
+.tool-list { list-style: none; padding: 0; margin: 0; }
+.tool-list li {
+  font-family: var(--sans);
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  padding: 4px 0;
+}
+
+.recursion-callout {
+  margin-top: clamp(48px, 7vw, 80px);
+  padding: clamp(36px, 5vw, 56px);
+  background: var(--ink);
+  color: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.recursion-callout::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 80px; height: 3px;
+  background: var(--accent);
+}
+.recursion-mark {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 24px;
+}
+.recursion-line {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(20px, 2.4vw, 32px);
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--bg);
+  max-width: 60ch;
+}
+html[lang="ko"] .recursion-line {
+  font-family: var(--sans-ko);
+  font-weight: 400;
+  font-size: clamp(18px, 2vw, 26px);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+}
+
+/* ============================================================================
+   §03 BUILDER'S PRACTICE, FIVE PRACTICE AREAS + CLOSING THESIS
+   ============================================================================ */
+.practice-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--ink);
+}
+.practice {
+  padding: 36px 0;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .practice { grid-template-columns: 1fr; gap: 16px; padding: 28px 0; }
+}
+.practice-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.practice-name {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 14px;
+  max-width: 22ch;
+}
+html[lang="ko"] .practice-name {
+  font-family: var(--sans-ko);
+  font-weight: 600;
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+.practice-body {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  max-width: 70ch;
+}
+.practice-body em { font-style: italic; color: var(--ink); }
+
+.practice-thesis {
+  margin-top: clamp(48px, 7vw, 80px);
+  padding: clamp(36px, 5vw, 56px);
+  background: var(--bg-2);
+  border: 1px solid var(--ink);
+  position: relative;
+}
+.practice-thesis::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0;
+  width: 80px; height: 3px;
+  background: var(--accent);
+}
+.practice-thesis-mark {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 20px;
+}
+.practice-thesis-line {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  max-width: 60ch;
+}
+.practice-thesis-line em { font-style: italic; color: var(--accent); }
+html[lang="ko"] .practice-thesis-line {
+  font-family: var(--sans-ko);
+  font-weight: 500;
+  font-size: clamp(18px, 2.1vw, 24px);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+}
+html[lang="ko"] .practice-thesis-line em { font-weight: 700; }
+
+/* ============================================================================
+   §04 SIX-DAY CYCLE — 4-WEEK CARDS + READING CIRCLE
+   ============================================================================ */
+.cycle-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: clamp(48px, 7vw, 80px);
+}
+@media (max-width: 900px) { .cycle-cards { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .cycle-cards { grid-template-columns: 1fr; } }
+.cy-card {
+  padding: 32px 28px;
+  border-right: 1px solid var(--line);
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+}
+.cy-card:last-child { border-right: 0; }
+@media (max-width: 900px) {
+  .cy-card { border-bottom: 1px solid var(--line); }
+  .cy-card:nth-child(2n) { border-right: 0; }
+  .cy-card:nth-last-child(-n+2) { border-bottom: 0; }
+}
+@media (max-width: 560px) {
+  .cy-card { border-right: 0 !important; border-bottom: 1px solid var(--line); }
+  .cy-card:last-child { border-bottom: 0; }
+}
+.cy-card-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+.cy-card-name {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+html[lang="ko"] .cy-card-name {
+  font-family: var(--sans-ko);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.cy-card-desc {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin-bottom: 20px;
+  flex: 1;
+}
+.cy-card-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  margin-top: auto;
+}
+
+/* Fields of Inquiry — replaces the old 12-week table */
+.fields-intro { margin: clamp(48px, 7vw, 80px) 0 32px; max-width: 760px; }
+.fields-headline {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(22px, 2.6vw, 30px);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 14px 0 18px;
+}
+.fields-headline em { font-style: italic; color: var(--accent); }
+html[lang="ko"] .fields-headline {
+  font-family: var(--sans-ko);
+  font-weight: 600;
+  font-size: clamp(19px, 2.2vw, 24px);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+html[lang="ko"] .fields-headline em { font-weight: 700; }
+.fields-lede {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  max-width: 64ch;
+}
+.fields-lede em { font-style: italic; color: var(--ink); }
+
+.fields-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid var(--line);
+}
+@media (max-width: 900px) { .fields-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .fields-grid { grid-template-columns: 1fr; } }
+
+.field {
+  padding: 28px 24px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  transition: background .2s;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 220px;
+}
+.field:hover { background: var(--bg-2); }
+
+.field-tag {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  align-self: flex-start;
+  border: 1px solid var(--accent);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+html[lang="ko"] .field-tag { letter-spacing: 0.06em; }
+
+.field-q {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+html[lang="ko"] .field-q {
+  font-family: var(--sans-ko);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16.5px;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+
+.field-body {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  flex: 1;
+}
+
+/* Session shape: how a single meeting actually runs */
+.session-shape {
+  margin-top: clamp(56px, 8vw, 88px);
+  padding-top: 32px;
+  border-top: 1px solid var(--ink);
+}
+.ss-mark {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 24px;
+}
+.ss-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+@media (max-width: 900px) { .ss-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .ss-grid { grid-template-columns: 1fr; } }
+.ss-step {
+  padding: 24px 20px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+.ss-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.ss-name {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+html[lang="ko"] .ss-name {
+  font-family: var(--sans-ko);
+  font-weight: 600;
+  font-size: 15.5px;
+  line-height: 1.4;
+}
+.ss-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.reading-circle {
+  margin-top: clamp(48px, 7vw, 80px);
+  padding: clamp(36px, 5vw, 56px);
+  border: 1px solid var(--ink);
+  background: var(--bg-2);
+  position: relative;
+}
+.reading-circle::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0;
+  width: 80px; height: 3px;
+  background: var(--accent);
+}
+.rc-mark {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 20px;
+}
+.rc-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.rc-title em { font-style: italic; color: var(--accent); }
+html[lang="ko"] .rc-title {
+  font-family: var(--sans-ko);
+  font-weight: 600;
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+html[lang="ko"] .rc-title em { font-weight: 700; }
+.rc-body {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  max-width: 70ch;
+}
+.rc-body em { font-style: italic; color: var(--ink); }
+
+/* ============================================================================
+   §05 ACTIVITIES & EVENTS
+   ============================================================================ */
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid var(--line);
+}
+@media (max-width: 900px) { .activities-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .activities-grid { grid-template-columns: 1fr; } }
+
+.activity {
+  padding: 32px 28px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  transition: background .25s;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 320px;
+}
+.activity:hover { background: var(--bg-2); }
+.activity-tag {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  align-self: flex-start;
+}
+.activity-tag-p0 { color: var(--accent); }
+.activity-cadence {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 8px 0;
+}
+.activity-name {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+html[lang="ko"] .activity-name {
+  font-family: var(--sans-ko);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.activity-desc {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  flex: 1;
+}
+
+/* ============================================================================
+   §08 WHY NOW — GAPS
+   ============================================================================ */
+.gaps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--ink);
+}
+.gap {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .gap { grid-template-columns: 1fr; gap: 16px; padding: 28px 0; }
+}
+.gap-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.gap-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(22px, 2.6vw, 30px);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: 14px;
+  max-width: 38ch;
+}
+html[lang="ko"] .gap-title {
+  font-family: var(--sans-ko);
+  font-weight: 600;
+  font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+.gap-body {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  max-width: 70ch;
+}
+.gap-body em { font-style: italic; color: var(--ink); }
+
+/* ============================================================================
+   §09 TEAM
+   ============================================================================ */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--ink);
+  border-left: 1px solid var(--line);
+}
+@media (max-width: 900px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .team-grid { grid-template-columns: 1fr; } }
+.team-card {
+  padding: 32px 24px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 280px;
+  transition: background .25s;
+}
+.team-card:hover { background: var(--bg-2); }
+.team-role {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.team-name {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+.team-focus {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  flex: 1;
+}
+.team-contact {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--ink-2);
+  word-break: break-all;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  margin-top: auto;
+  transition: color .15s;
+}
+.team-contact:hover { color: var(--accent); }
+.team-contact-muted {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--ink-3);
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  margin-top: auto;
+}
+
+.advisor-line {
+  margin-top: clamp(40px, 5vw, 56px);
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  align-items: baseline;
+}
+@media (max-width: 760px) { .advisor-line { grid-template-columns: 1fr; gap: 8px; } }
+.advisor-line-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.advisor-line-body {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+html[lang="ko"] .advisor-line-body {
+  font-family: var(--sans-ko);
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* ============================================================================
+   §10 PARTNERS & SPEAKERS — TIERS
+   ============================================================================ */
+.partners-tiers {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--ink);
+}
+.tier {
+  padding: 36px 0;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .tier { grid-template-columns: 1fr; gap: 12px; padding: 24px 0; }
+}
+.tier-head { display: flex; flex-direction: column; gap: 6px; }
+.tier-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-transform: uppercase;
+  padding-top: 4px;
+}
+.tier-name {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(20px, 2.2vw, 26px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+html[lang="ko"] .tier-name {
+  font-family: var(--sans-ko);
+  font-weight: 600;
+  font-size: clamp(17px, 1.9vw, 21px);
+  line-height: 1.3;
+}
+.tier-list { list-style: none; padding: 0; margin: 0; }
+.tier-list li {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.tier-list li:last-child { border-bottom: 0; }
+.tier-stat {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.tier-body {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  max-width: 64ch;
+}
+html[lang="ko"] .tier-body { font-family: var(--sans-ko); font-size: 15px; line-height: 1.75; }
+.partners-note {
+  margin-top: 32px;
+  font-size: 13px;
+  color: var(--ink-3);
+  font-style: italic;
+  max-width: 70ch;
+}
+
+/* ============================================================================
    REVEAL ON SCROLL
    ============================================================================ */
 .reveal {
@@ -1182,7 +1909,7 @@ html[lang="en"] body { font-family: var(--sans); }
 <header class="topbar">
   <div class="wrap topbar-inner">
     <div class="brand">
-      <a href="#top" class="brand-home" aria-label="MATRIX AI Lab — home">
+      <a href="#top" class="brand-home" aria-label="MATRIX AI Lab home">
         <span class="brand-mark"><span></span><span></span><span></span><span></span></span>
         <span>MATRIX AI Lab</span>
       </a>
@@ -1195,10 +1922,11 @@ html[lang="en"] body { font-family: var(--sans); }
     </div>
     <nav class="nav">
       <a href="#mission"><span data-lang="ko">미션</span><span data-lang="en">Mission</span></a>
-      <a href="#approach"><span data-lang="ko">방법</span><span data-lang="en">Approach</span></a>
-      <a href="#curriculum"><span data-lang="ko">커리큘럼</span><span data-lang="en">Curriculum</span></a>
+      <a href="#curriculum"><span data-lang="ko">사이클</span><span data-lang="en">Cycle</span></a>
+      <a href="#activities"><span data-lang="ko">활동</span><span data-lang="en">Activities</span></a>
       <a href="#tracks"><span data-lang="ko">트랙</span><span data-lang="en">Tracks</span></a>
       <a href="#library"><span data-lang="ko">아카이브</span><span data-lang="en">Archive</span></a>
+      <a href="#team"><span data-lang="ko">팀</span><span data-lang="en">Team</span></a>
       <a href="#faq">FAQ</a>
       <div class="lang-toggle lang-skip" role="group" aria-label="Language">
         <button id="btn-en" class="active" type="button">EN</button>
@@ -1234,7 +1962,7 @@ html[lang="en"] body { font-family: var(--sans); }
       <aside class="hero-side">
         <p>
           <span data-lang="ko"><em>MATRIX AI Lab</em>은 서울외국인학교의 AI 연구·빌드 커뮤니티입니다. 우리는 AI에 대한 호기심에서 출발해, 함께 읽고, 토론하고, 실험하고, 발표하고, 글과 코드로 남깁니다.</span>
-          <span data-lang="en"><em>MATRIX AI Lab</em> is a student research community at Seoul Foreign School. We start from curiosity about AI and turn it into reading, debate, experiments, talks, writing, and code — together.</span>
+          <span data-lang="en"><em>MATRIX AI Lab</em> is a student research community at Seoul Foreign School. We start from curiosity about AI and turn it into reading, debate, experiments, talks, writing, and code, together.</span>
         </p>
 
         <div class="hero-actions">
@@ -1268,8 +1996,8 @@ html[lang="en"] body { font-family: var(--sans); }
         <span class="acr-word">E<span class="acr-letter">x</span>change</span>
       </div>
       <div class="acronym-gloss">
-        <span data-lang="ko">호기심에서 출발해, 수학과 AI 이론을 분석의 도구로 빌리고, 연구와 탐구의 결과를 학생들 사이에 공개적으로 교환한다 — 클럽 이름이 곧 작업 방식이다.</span>
-        <span data-lang="en">We start from curiosity, borrow mathematics and AI theory as our analytic lens, and openly exchange the results of research and inquiry among students — the name is the method.</span>
+        <span data-lang="ko">호기심에서 출발해, 수학과 AI 이론을 분석의 도구로 빌리고, 연구와 탐구의 결과를 학생들 사이에 공개적으로 교환한다, 클럽 이름이 곧 작업 방식이다.</span>
+        <span data-lang="en">We start from curiosity, borrow mathematics and AI theory as our analytic lens, and openly exchange the results of research and inquiry among students, the name is the method.</span>
       </div>
     </figure>
 
@@ -1307,8 +2035,8 @@ html[lang="en"] body { font-family: var(--sans); }
           <span class="lang-en lang-block"><em>What we do.</em><br><em>Where we are going.</em></span>
         </h2>
         <p class="section-lede">
-          <span data-lang="ko">MATRIX는 단순한 동아리 이름이 아니라 우리의 작업 방식 — 수학에서 시작해, AI 이론을 거쳐, 연구와 탐구를 공개적으로 교환하는 — 을 정의하는 약어입니다. 미션은 현재이고, 비전은 그 미션이 5년 뒤 만들어 낼 자리입니다.</span>
-          <span data-lang="en">MATRIX is not just a club name — it is shorthand for how we work: from <em>mathematics</em>, through <em>AI theory</em>, to <em>research</em> and <em>inquiry</em>, openly <em>exchanged</em>. The mission is what we do now. The vision is the place that work makes possible in five years.</span>
+          <span data-lang="ko">MATRIX는 단순한 동아리 이름이 아니라 우리의 작업 방식, 수학에서 시작해, AI 이론을 거쳐, 연구와 탐구를 공개적으로 교환하는, 을 정의하는 약어입니다. 미션은 현재이고, 비전은 그 미션이 5년 뒤 만들어 낼 자리입니다.</span>
+          <span data-lang="en">MATRIX is not just a club name, it is shorthand for how we work: from <em>mathematics</em>, through <em>AI theory</em>, to <em>research</em> and <em>inquiry</em>, openly <em>exchanged</em>. The mission is what we do now. The vision is the place that work makes possible in five years.</span>
         </p>
       </div>
     </div>
@@ -1324,8 +2052,8 @@ html[lang="en"] body { font-family: var(--sans); }
           <span class="lang-en lang-block">To start from <em>curiosity about AI,</em> read and debate and build together, and <em>publish what we make.</em></span>
         </h3>
         <p class="mv-body">
-          <span data-lang="ko">MATRIX는 AI를 더 깊게 알고 싶은 SFS 학생들의 모임입니다. 우리는 매주 모여 관심 있는 주제를 발제하고 토론하며, 작은 실험과 프로젝트를 자기주도적으로 끌고 갑니다. 분석할 일이 있으면 수학을 빌리고, 검증할 일이 있으면 코드를 빌리고, 설명할 일이 있으면 글과 발표를 빌립니다. 도구는 질문을 따라옵니다 — 그 반대가 아닙니다. 학기마다 적어도 하나의 공개 산출물을 Archive에 남기고, 그렇게 학습이 사라지지 않고 누적되는 구조를 만듭니다.</span>
-          <span data-lang="en">MATRIX is a community of SFS students who want to understand AI more deeply. We meet weekly to present and debate the topics we are curious about, and we run small experiments and projects in a self-directed way. When something needs analysis we borrow mathematics; when something needs verification we borrow code; when something needs explaining we borrow writing and talks. The tools follow the question — never the other way around. Each semester we commit at least one public artifact to the Archive, so that learning compounds rather than disappears.</span>
+          <span data-lang="ko">MATRIX는 AI를 더 깊게 알고 싶은 SFS 학생들의 모임입니다. 우리는 매주 모여 관심 있는 주제를 발제하고 토론하며, 작은 실험과 프로젝트를 자기주도적으로 끌고 갑니다. 분석할 일이 있으면 수학을 빌리고, 검증할 일이 있으면 코드를 빌리고, 설명할 일이 있으면 글과 발표를 빌립니다. 도구는 질문을 따라옵니다, 그 반대가 아닙니다. 학기마다 적어도 하나의 공개 산출물을 Archive에 남기고, 그렇게 학습이 사라지지 않고 누적되는 구조를 만듭니다.</span>
+          <span data-lang="en">MATRIX is a community of SFS students who want to understand AI more deeply. We meet weekly to present and debate the topics we are curious about, and we run small experiments and projects in a self-directed way. When something needs analysis we borrow mathematics; when something needs verification we borrow code; when something needs explaining we borrow writing and talks. The tools follow the question, never the other way around. Each semester we commit at least one public artifact to the Archive, so that learning compounds rather than disappears.</span>
         </p>
       </article>
 
@@ -1339,27 +2067,183 @@ html[lang="en"] body { font-family: var(--sans); }
           <span class="lang-en lang-block">A place where Korean high-school students stand at <em>the entrance of global AI research.</em> A place where the questions we ask <em>become a record the next cohort can build on.</em></span>
         </h3>
         <p class="mv-body">
-          <span data-lang="ko">우리의 장기 목표는 학생들의 호기심이 시간 순으로 누적되는 공개 기록이 되는 것입니다. 질문, 실험, 수정, 설명, 기여가 시간 순으로 남아 다음 학번이 이어 쓸 수 있는 형태. transformer, interpretability, alignment 같은 최전선 주제를 한국 고등학교 환경의 학생이 진지하게 — 그러나 즐겁게 — 다룰 수 있다는 것을 증명하는 것이 우리의 야심입니다.</span>
-          <span data-lang="en">Our long-term aim is to make student curiosity compound rather than disappear — a public record of questions, experiments, revisions, explanations, and contributions, in time order, for the next cohort to build on. Our ambition is to show that students in a Korean high school can take the frontier — transformers, interpretability, alignment — seriously, and have fun with it.</span>
+          <span data-lang="ko">우리의 장기 목표는 학생들의 호기심이 시간 순으로 누적되는 공개 기록이 되는 것입니다. 질문, 실험, 수정, 설명, 기여가 시간 순으로 남아 다음 학번이 이어 쓸 수 있는 형태. transformer, interpretability, alignment 같은 최전선 주제를 한국 고등학교 환경의 학생이 진지하게, 그러나 즐겁게, 다룰 수 있다는 것을 증명하는 것이 우리의 야심입니다.</span>
+          <span data-lang="en">Our long-term aim is to make student curiosity compound rather than disappear, a public record of questions, experiments, revisions, explanations, and contributions, in time order, for the next cohort to build on. Our ambition is to show that students in a Korean high school can take the frontier, transformers, interpretability, alignment, seriously, and have fun with it.</span>
         </p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ======================== APPROACH (PRINCIPLES) ======================== -->
+<!-- ======================== SELF-APPLYING PHILOSOPHY ======================== -->
+<section id="philosophy">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="section-num">§ 02 / Self-Applying Philosophy</div>
+      <div>
+        <h2 class="section-title">
+          <span class="lang-ko lang-block">우리는 AI를 <em>공부하는 동시에</em> AI로 일한다.</span>
+          <span class="lang-en lang-block">We <em>study AI</em> and <em>work with AI</em> in the same motion.</span>
+        </h2>
+        <p class="section-lede">
+          <span data-lang="ko">대부분의 클럽은 AI를 <em>주제</em>로 다룹니다, 강의, 토론, 발표. 우리는 한 발 더 나갑니다. AI는 우리의 <em>주제이자 도구</em>입니다. 사이트, 자동화 파이프라인, 번역 워크플로우, 발표 영상 처리, 이 모든 것을 우리가 AI 코딩 어시스턴트로 직접 build합니다. 우리가 AI를 공부하는 방식이 곧 AI입니다.</span>
+          <span data-lang="en">Most clubs treat AI as a <em>subject</em>, lectures, debates, talks. We take one step further. AI is our <em>subject and our tool.</em> This website, our automation pipelines, our translation workflows, our talk-video processing, all of it is built by members using AI coding assistants. The way we study AI is itself AI.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Tool stack: a quiet, mono-style row of what we use -->
+    <div class="tool-stack">
+      <div class="tool-stack-head">
+        <span class="eyebrow">
+          <span data-lang="ko">우리가 쓰는 도구</span>
+          <span data-lang="en">The stack we work with</span>
+        </span>
+      </div>
+      <div class="tool-stack-grid">
+        <div class="tool-group">
+          <div class="tool-group-label"><span data-lang="ko">코딩</span><span data-lang="en">Coding</span></div>
+          <ul class="tool-list">
+            <li>Claude Code</li>
+            <li>Cursor</li>
+            <li>Antigravity</li>
+            <li>GitHub Copilot</li>
+          </ul>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-label"><span data-lang="ko">디자인 · UI</span><span data-lang="en">Design · UI</span></div>
+          <ul class="tool-list">
+            <li>v0 by Vercel</li>
+            <li>Stitch</li>
+            <li>Google AI Studio</li>
+            <li>Figma</li>
+          </ul>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-label"><span data-lang="ko">호스팅 · 데이터</span><span data-lang="en">Hosting · Data</span></div>
+          <ul class="tool-list">
+            <li>Vercel</li>
+            <li>GitHub Pages</li>
+            <li>Supabase</li>
+            <li>Cloudflare Workers</li>
+          </ul>
+        </div>
+        <div class="tool-group">
+          <div class="tool-group-label"><span data-lang="ko">크레딧</span><span data-lang="en">Credits</span></div>
+          <ul class="tool-list">
+            <li>Anthropic Claude for Education</li>
+            <li>Google AI Studio</li>
+            <li>OpenAI Education</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- The recursion line — the lab's signature claim -->
+    <div class="recursion-callout">
+      <div class="recursion-mark">
+        <span data-lang="ko">시그니처</span>
+        <span data-lang="en">Signature</span>
+      </div>
+      <p class="recursion-line">
+        <span data-lang="ko">매년 모든 활동 멤버는, 사전 코딩 경험과 무관하게, 자신만의 자동화 프로젝트를 하나 이상 출시합니다. 수학, 언어학, 철학에서 시작한 멤버에게도 vibe coding 도구가 그 길을 열어줍니다. 3년 전에는 존재하지 않던 구조적 기회입니다.</span>
+        <span data-lang="en">Every active member ships at least one personal automation project per year, regardless of prior coding background. Vibe coding tools have made this accessible to members whose entry point is mathematics, linguistics, or philosophy rather than CS. A structural opportunity that did not exist three years ago.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== BUILDER'S PRACTICE ======================== -->
+<section id="builders-practice">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="section-num">§ 03 / Builder's Practice</div>
+      <div>
+        <h2 class="section-title">
+          <span class="lang-ko lang-block">AI를 <em>가지고</em> AI를<br><em>만드는 법.</em></span>
+          <span class="lang-en lang-block">How we use AI to <em>build</em><br>AI things.</span>
+        </h2>
+        <p class="section-lede">
+          <span data-lang="ko">사용자에서 builder로 옮겨가는 가장 빠른 길은 작은 것을 직접 만들어 보는 것입니다. 이 섹션은 우리가 그 이행을 어떻게 가르치고 함께 연습하는지에 대한 자리입니다. 이론은 §02에서, 학기 사이클 안에서의 실행은 §05에서 다룹니다. 여기서는 builder의 자세, 매주의 작업 습관, 그리고 우리가 다루는 도구의 다섯 가지 결을 정리합니다.</span>
+          <span data-lang="en">The fastest path from being a user of AI to being a builder of AI is to make small things yourself. This section is about how we teach and practice that transition together. The philosophy lives in §02. Its weekly execution lives in §05. Here we describe the builder's stance, the practical habits, and the five kinds of tools we work with.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Five practice areas -->
+    <div class="practice-grid">
+      <article class="practice">
+        <div class="practice-num">01 / Practice</div>
+        <h3 class="practice-name"><span data-lang="ko">Vibe Coding</span><span data-lang="en">Vibe Coding</span></h3>
+        <p class="practice-body">
+          <span data-lang="ko">자연어로 의도를 설명하면 AI가 코드를 짜고, 우리가 읽고 수정하고 다시 부탁합니다. Cursor, Claude Code, Antigravity, GitHub Copilot. 코드 한 줄도 직접 짜지 않고도 작동하는 작은 도구를 처음부터 끝까지 만들 수 있는 시대입니다. 우리는 그 도구를 어떻게 묻고, 어떻게 검수하고, 어떻게 디버깅하는지 배웁니다.</span>
+          <span data-lang="en">You describe what you want in plain language; the AI writes code; you read it, fix it, and ask again. Cursor, Claude Code, Antigravity, GitHub Copilot. It is now possible to ship a small working tool without writing a line of code yourself. What we learn is how to ask well, how to inspect what comes back, and how to debug when it breaks.</span>
+        </p>
+      </article>
+
+      <article class="practice">
+        <div class="practice-num">02 / Practice</div>
+        <h3 class="practice-name"><span data-lang="ko">Prompting &amp; Specs</span><span data-lang="en">Prompting &amp; Specs</span></h3>
+        <p class="practice-body">
+          <span data-lang="ko">잘 만드는 사람은 잘 묻는 사람입니다. 좋은 프롬프트와 좋은 스펙은 같은 종류의 글쓰기 — 무엇을 원하고, 무엇을 원하지 않으며, 어떤 모양이어야 하는지를 정확하게 적는 일. 시스템 프롬프트, role prompting, evals 작성, structured output 같은 기법을 직접 써 보고 비교합니다.</span>
+          <span data-lang="en">People who build well are people who ask well. A good prompt and a good spec are the same kind of writing: stating exactly what you want, what you do not want, and the shape of the answer. We try out and compare techniques like system prompts, role prompting, eval writing, and structured output.</span>
+        </p>
+      </article>
+
+      <article class="practice">
+        <div class="practice-num">03 / Practice</div>
+        <h3 class="practice-name"><span data-lang="ko">Make &amp; Workflows</span><span data-lang="en">Make &amp; Workflows</span></h3>
+        <p class="practice-body">
+          <span data-lang="ko">한 번 짠 코드보다 자동으로 도는 워크플로우가 더 멀리 갑니다. Make (구 Integromat), n8n, Zapier 같은 도구로 노코드 자동화를 짜고, 그 안에 LLM 호출을 끼워 넣어 본인의 일을 대신하게 만듭니다. 클럽 운영도 — 발표 영상의 자막, 출석 정리, 뉴스레터 — 같은 방식으로 자동화합니다. 우리가 만드는 것이 우리를 자유롭게 합니다.</span>
+          <span data-lang="en">A workflow that runs by itself outlasts a script you wrote once. With tools like Make (formerly Integromat), n8n, and Zapier we wire no-code automations and slip LLM calls inside them so they do work for us. We run the club itself this way: caption pipelines for talk videos, attendance roll-ups, newsletters. The things we build set us free to build more.</span>
+        </p>
+      </article>
+
+      <article class="practice">
+        <div class="practice-num">04 / Practice</div>
+        <h3 class="practice-name"><span data-lang="ko">Frontend &amp; UI</span><span data-lang="en">Frontend &amp; UI</span></h3>
+        <p class="practice-body">
+          <span data-lang="ko">아이디어가 화면 위에 있을 때 비로소 진짜가 됩니다. v0 by Vercel, Lovable, Stitch, Google AI Studio. 이 도구들은 자연어로 React 컴포넌트와 페이지를 만들어 줍니다. 멤버 각자가 본인의 작은 도구에 본인의 화면을 입혀 봅니다. 이 사이트도 그런 방식으로 만들어졌습니다.</span>
+          <span data-lang="en">An idea becomes real once it lives on a screen. v0 by Vercel, Lovable, Stitch, Google AI Studio. These tools turn natural language into React components and full pages. Each member learns to put their own screen on top of their own small tool. This very site was made that way.</span>
+        </p>
+      </article>
+
+      <article class="practice">
+        <div class="practice-num">05 / Practice</div>
+        <h3 class="practice-name"><span data-lang="ko">RAG &amp; Agents</span><span data-lang="en">RAG &amp; Agents</span></h3>
+        <p class="practice-body">
+          <span data-lang="ko">한 단계 더. 모델에 본인의 자료를 읽힌 뒤(retrieval), 여러 도구를 차례로 호출하게 만들기(agents). 작은 RAG 챗봇 — 본인의 노트, 클럽 발표 영상의 자막, 좋아하는 책의 챕터를 두고 질문하는 — 부터 시작해, 점차 더 자율적인 에이전트로 옮겨 갑니다. 한계가 어디서 깨지는지 직접 보는 자리이기도 합니다.</span>
+          <span data-lang="en">One step further. We feed the model our own material (retrieval), then have it call several tools in sequence (agents). We start with a small RAG chatbot, asking questions over your own notes, the captions of a club talk, the chapters of a book you love, and move toward more autonomous agents from there. It is also where you see firsthand exactly where these systems break.</span>
+        </p>
+      </article>
+    </div>
+
+    <!-- The thesis tying it together -->
+    <div class="practice-thesis">
+      <div class="practice-thesis-mark">
+        <span data-lang="ko">정리</span>
+        <span data-lang="en">In short</span>
+      </div>
+      <p class="practice-thesis-line">
+        <span data-lang="ko">한 학기 안에 우리는 <em>작은 것을 짓는다.</em> 본인의 자동화, 본인의 RAG 도우미, 본인의 데모, 본인의 자그마한 워크플로우. 코드를 잘 짜는 학생만의 영역이 아닙니다. 잘 묻고, 잘 읽고, 잘 검수하는 학생이라면 누구든 builder가 될 수 있습니다.</span>
+        <span data-lang="en">Inside one term, we <em>build small things.</em> A personal automation, a small RAG helper, a working demo, a tidy workflow. This is not an area reserved for strong coders. Anyone who asks well, reads well, and inspects well can become a builder.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
 <section id="approach">
   <div class="wrap reveal">
     <div class="section-head">
-      <div class="section-num">§ 02 / Approach</div>
+      <div class="section-num">§ 04 / Approach</div>
       <div>
         <h2 class="section-title">
           <span class="lang-ko lang-block">우리가 매주<br><em>실제로 하는 일.</em></span>
           <span class="lang-en lang-block">What we<br><em>actually do</em> each week.</span>
         </h2>
         <p class="section-lede">
-          <span data-lang="ko">미션이 추상이라면, 아래 네 가지는 매주 실제로 작동하는 습관입니다 — 묻고, 함께 읽고, 직접 만들고, 남깁니다. 평가는 출석이 아닌 — 호기심의 깊이, 토론의 질, 실험의 재현성, 설명력 — 으로 합니다.</span>
-          <span data-lang="en">Where the mission is abstract, the four habits below are what actually runs each week — we ask, we read together, we build it ourselves, we leave a record. We assess on the depth of curiosity, the quality of debate, the reproducibility of experiments, and clarity of explanation — not attendance.</span>
+          <span data-lang="ko">미션이 추상이라면, 아래 네 가지는 매주 실제로 작동하는 습관입니다, 묻고, 함께 읽고, 직접 만들고, 남깁니다. 평가는 출석이 아닌, 호기심의 깊이, 토론의 질, 실험의 재현성, 설명력, 으로 합니다.</span>
+          <span data-lang="en">Where the mission is abstract, the four habits below are what actually runs each week, we ask, we read together, we build it ourselves, we leave a record. We assess on the depth of curiosity, the quality of debate, the reproducibility of experiments, and clarity of explanation, not attendance.</span>
         </p>
       </div>
     </div>
@@ -1368,7 +2252,7 @@ html[lang="en"] body { font-family: var(--sans); }
       <article class="principle">
         <div class="principle-num">01 / Principle</div>
         <h3><span data-lang="ko">묻는다</span><span data-lang="en">We ask first.</span></h3>
-        <p><span data-lang="ko">호기심이 시작점이다. "왜 이렇게 작동하지?"라는 질문이 매주 우리의 의제를 정하고, 분석은 그 질문을 따라간다 — 수학, 코드, 글, 무엇이든.</span><span data-lang="en">Curiosity sets the agenda. "Why does this work?" is what fills our weekly slate; the analysis — math, code, writing, whatever fits — follows the question.</span></p>
+        <p><span data-lang="ko">호기심이 시작점이다. "왜 이렇게 작동하지?"라는 질문이 매주 우리의 의제를 정하고, 분석은 그 질문을 따라간다, 수학, 코드, 글, 무엇이든.</span><span data-lang="en">Curiosity sets the agenda. "Why does this work?" is what fills our weekly slate; the analysis, math, code, writing, whatever fits, follows the question.</span></p>
       </article>
       <article class="principle">
         <div class="principle-num">02 / Principle</div>
@@ -1383,7 +2267,7 @@ html[lang="en"] body { font-family: var(--sans); }
       <article class="principle">
         <div class="principle-num">04 / Principle</div>
         <h3><span data-lang="ko">남긴다</span><span data-lang="en">We leave a record.</span></h3>
-        <p><span data-lang="ko">발표, 글, 저장소, 라이선스. 학기마다 끝까지 완성한 것을 공개한다. 다음 학번이 우리의 작업 위에 한 발 더 올라설 수 있도록.</span><span data-lang="en">Talks, writeups, repositories, licenses. Each semester we publish at least one finished piece of work, credited to its student authors — so the next cohort can stand a step higher on what we made.</span></p>
+        <p><span data-lang="ko">발표, 글, 저장소, 라이선스. 학기마다 끝까지 완성한 것을 공개한다. 다음 학번이 우리의 작업 위에 한 발 더 올라설 수 있도록.</span><span data-lang="en">Talks, writeups, repositories, licenses. Each semester we publish at least one finished piece of work, credited to its student authors, so the next cohort can stand a step higher on what we made.</span></p>
       </article>
     </div>
   </div>
@@ -1393,75 +2277,241 @@ html[lang="en"] body { font-family: var(--sans); }
 <section id="curriculum">
   <div class="wrap reveal">
     <div class="section-head">
-      <div class="section-num">§ 03 / Curriculum</div>
+      <div class="section-num">§ 05 / How a Term Runs</div>
       <div>
         <h2 class="section-title">
-          <span class="lang-ko lang-block">한 학기, 12주.<br><em>질문에서 시작해 기록으로 끝난다.</em></span>
-          <span class="lang-en lang-block">One semester. Twelve weeks.<br><em>From question to public record.</em></span>
+          <span class="lang-ko lang-block">한 학기는 <em>분야로 짜이고,</em><br>한 사이클은 <em>네 모드로 돈다.</em></span>
+          <span class="lang-en lang-block">A term is <em>shaped by fields.</em><br>A cycle <em>turns through four modes.</em></span>
         </h2>
         <p class="section-lede">
-          <span data-lang="ko">아래는 운영진이 함께 짜고 있는 <em>작업 중인 초안</em>입니다 — 회원의 관심사와 학기 흐름에 따라 매년 다듬습니다. 자주 참조하는 자료는 <em>Mathematics for Machine Learning</em> (Deisenroth, Faisal, Ong)과 <em>Deep Learning</em> (Goodfellow, Bengio, Courville). 뒤쪽 축으로는 transformer, interpretability, alignment 같은 최근 연구 흐름을 함께 따라갑니다.</span>
-          <span data-lang="en">Below is a <em>working draft</em> our leadership team is shaping together — it is revised each year based on member interests and the rhythm of the term. Texts we lean on include <em>Mathematics for Machine Learning</em> (Deisenroth, Faisal, Ong) and <em>Deep Learning</em> (Goodfellow, Bengio, Courville). The second half follows current threads like transformer, interpretability, and alignment.</span>
+          <span data-lang="ko">고정된 진도표는 없습니다. 매 학기 운영진과 멤버가 함께 5–6개의 학제 분야를 고르고, 각 분야가 한 사이클(4주)의 대주제가 됩니다. 그 안에서 발제자가 돌아가며 이끌고, 모든 멤버는 호기심과 사전 준비를 들고 옵니다, 강의가 아니라 <em>inquiry exchange.</em></span>
+          <span data-lang="en">There is no fixed syllabus. Each term, execs and members together choose five or six fields of inquiry; each becomes the theme of a four-week cycle. Within it, presenters rotate; every member arrives with curiosity and a little prepared homework. This is not a lecture series, it is an <em>inquiry exchange.</em></span>
         </p>
       </div>
     </div>
 
-    <div class="curri-wrap">
-      <div class="curri-stamp">
-        <span data-lang="ko">Draft v0.3 · 운영진 작업 중</span>
-        <span data-lang="en">Draft v0.3 · in active revision</span>
-      </div>
-      <table class="curri">
-        <thead>
-          <tr id="curri-head"></tr>
-        </thead>
-        <tbody id="curri-body"></tbody>
-      </table>
+    <!-- Six-Day Cycle 4-week cards -->
+    <div class="cycle-cards">
+      <article class="cy-card">
+        <div class="cy-card-num">Week 01</div>
+        <h3 class="cy-card-name"><span data-lang="ko">Inquiry Session</span><span data-lang="en">Inquiry Session</span></h3>
+        <p class="cy-card-desc"><span data-lang="ko">그 학기 분야의 첫 번째 주제로 발제자 2–3명이 짧은 발제. 핵심 질문, 알고 있는 것, 모르고 있는 것. 모든 멤버가 질문을 들고 옵니다, 토론이 본질.</span><span data-lang="en">Two or three members open the term's first chosen field with short presentations. Central question, what is known, what is not. Everyone arrives with questions, discussion is the point.</span></p>
+        <div class="cy-card-meta"><span data-lang="ko">2–3명 발제 · 전원 사전 준비</span><span data-lang="en">2–3 presenters · all prepared</span></div>
+      </article>
+      <article class="cy-card">
+        <div class="cy-card-num">Week 02</div>
+        <h3 class="cy-card-name"><span data-lang="ko">Reading Circle</span><span data-lang="en">Reading Circle</span></h3>
+        <p class="cy-card-desc"><span data-lang="ko">그 분야의 핵심 글 한두 편, 논문, 책 챕터, 또는 에세이, 을 읽고 옵니다. 한 멤버가 글을 발제하고, 가장 약한 가정과 가장 흥미로운 부분을 함께 짚습니다.</span><span data-lang="en">Members come having read one or two essential pieces, a paper, a book chapter, an essay. One member presents the text; we identify together its weakest assumption and its most interesting move.</span></p>
+        <div class="cy-card-meta"><span data-lang="ko">사전 읽기 · 발제 + 토론</span><span data-lang="en">Pre-read · present + discuss</span></div>
+      </article>
+      <article class="cy-card">
+        <div class="cy-card-num">Week 03</div>
+        <h3 class="cy-card-name"><span data-lang="ko">Build &amp; Try</span><span data-lang="en">Build &amp; Try</span></h3>
+        <p class="cy-card-desc"><span data-lang="ko">손으로 직접 해봅니다, 작은 데모, 시각화, 데이터 실험, vibe coding. 그 분야의 질문을 코드나 visual로 풀어 보는 자리. 막히면 옆 사람과, 임원이 돕습니다.</span><span data-lang="en">Hands on, a small demo, a visualization, a data experiment, some vibe coding. We try to answer that field's question through code or pictures. When stuck, we lean on each other and the execs.</span></p>
+        <div class="cy-card-meta"><span data-lang="ko">노트북 + 작은 결과물</span><span data-lang="en">Laptops + small artifacts</span></div>
+      </article>
+      <article class="cy-card">
+        <div class="cy-card-num">Week 04</div>
+        <h3 class="cy-card-name"><span data-lang="ko">Share &amp; Reflect</span><span data-lang="en">Share &amp; Reflect</span></h3>
+        <p class="cy-card-desc"><span data-lang="ko">그 사이클에 본 것, 만든 것, 못 풀어 둔 것을 짧게 나눕니다. 다음 분야로 넘어가기 전에 정리. 영상은 Library로, 미해결 질문은 다음 학기로 넘깁니다.</span><span data-lang="en">A short round of what we saw, what we made, what we left unresolved. Closure before the next field begins. Videos go to the Library; open questions get carried into the next term.</span></p>
+        <div class="cy-card-meta"><span data-lang="ko">짧은 발표 · 다음 분야로</span><span data-lang="en">Short shares · onward</span></div>
+      </article>
     </div>
 
-    <div class="cycle-block">
-      <span class="eyebrow">
-        <span data-lang="ko">학기 사이클</span>
-        <span data-lang="en">The semester cycle</span>
-      </span>
-      <h3 class="cycle-intro">
-        <span data-lang="ko">Foundations → Reading → Build → Symposium → Archive.</span>
-        <span data-lang="en">Foundations → Reading → Build → Symposium → Archive.</span>
+    <!-- Annual Reading Circle callout -->
+    <div class="reading-circle">
+      <div class="rc-mark">
+        <span data-lang="ko">연간 활동</span>
+        <span data-lang="en">Annual practice</span>
+      </div>
+      <h3 class="rc-title">
+        <span class="lang-ko lang-block">The Reading Circle: <em>여러 책의 핵심을, 돌아가며.</em></span>
+        <span class="lang-en lang-block">The Reading Circle: <em>essential chapters, in rotation.</em></span>
       </h3>
+      <p class="rc-body">
+        <span data-lang="ko">매월 한 번, Foundations Session이 Reading Circle로 교체됩니다. 한 권을 1년에 걸쳐 끝내는 것이 목적이 아닙니다. AI를 떠받치는 여러 권의 핵심 문헌들 가운데, 그 학기에 가장 필요한 챕터들을 발췌해 함께 읽습니다. 후보 도서: <em>Mathematics for Machine Learning</em> (Deisenroth et al.), <em>Deep Learning</em> (Goodfellow et al.), <em>The Alignment Problem</em> (Christian), <em>Human Compatible</em> (Russell), <em>Pattern Recognition and Machine Learning</em> (Bishop). 매 세션 한 멤버가 그 챕터를 발제하고, 5분 핵심 요약, 보드에 한 문제 풀이, 나머지 시간은 토론으로 채웁니다. 발제는 멤버가 돌아가며 맡습니다.</span>
+        <span data-lang="en">Once a month, Foundations Session is replaced by Reading Circle. The point is not to finish one book in a year. It is to read excerpted chapters from several foundational texts on AI, picked for what the term needs. Candidate texts include <em>Mathematics for Machine Learning</em> (Deisenroth et al.), <em>Deep Learning</em> (Goodfellow et al.), <em>The Alignment Problem</em> (Christian), <em>Human Compatible</em> (Russell), and <em>Pattern Recognition and Machine Learning</em> (Bishop). Each session a different member presents the chapter: a five-minute summary, one prepared problem on the board, then open discussion. Presenters rotate.</span>
+      </p>
+    </div>
 
-      <div class="cycle">
-        <div class="cy-step">
-          <div class="step-num">01 / Inflow</div>
-          <div class="step-name"><span data-lang="ko">유입</span><span data-lang="en">Inflow</span></div>
-          <div class="step-desc"><span data-lang="ko">관심 학생 모집과 페어링</span><span data-lang="en">Onboarding and pairing</span></div>
-        </div>
-        <div class="cy-step">
-          <div class="step-num">02 / Foundations</div>
-          <div class="step-name"><span data-lang="ko">기초</span><span data-lang="en">Foundations</span></div>
-          <div class="step-desc"><span data-lang="ko">수학과 모형 직관</span><span data-lang="en">Math and model intuitions</span></div>
-        </div>
-        <div class="cy-step">
-          <div class="step-num">03 / Reading</div>
-          <div class="step-name"><span data-lang="ko">리딩</span><span data-lang="en">Reading</span></div>
-          <div class="step-desc"><span data-lang="ko">원문 논문 정독</span><span data-lang="en">Close-reading source papers</span></div>
-        </div>
-        <div class="cy-step">
-          <div class="step-num">04 / Build</div>
-          <div class="step-name"><span data-lang="ko">빌드</span><span data-lang="en">Build</span></div>
-          <div class="step-desc"><span data-lang="ko">실험과 baseline 비교</span><span data-lang="en">Baselines and experiments</span></div>
-        </div>
-        <div class="cy-step">
-          <div class="step-num">05 / Symposium</div>
-          <div class="step-name"><span data-lang="ko">심포지엄</span><span data-lang="en">Symposium</span></div>
-          <div class="step-desc"><span data-lang="ko">공개 발표와 피드백</span><span data-lang="en">Public talks and feedback</span></div>
-        </div>
-        <div class="cy-step">
-          <div class="step-num">06 / Archive</div>
-          <div class="step-name"><span data-lang="ko">아카이브</span><span data-lang="en">Archive</span></div>
-          <div class="step-desc"><span data-lang="ko">Library에 영구 보존</span><span data-lang="en">Permanent record in Library</span></div>
-        </div>
+    <!-- Fields of Inquiry — replaces the 12-week table.
+         Each term cycles through a handful of these fields; presenters rotate. -->
+    <div class="fields-intro">
+      <span class="eyebrow">
+        <span data-lang="ko">학기의 큰 축</span>
+        <span data-lang="en">The shape of a term</span>
+      </span>
+      <h3 class="fields-headline">
+        <span class="lang-ko lang-block">한 학기는 <em>몇 가지 분야</em>로 짜인다.<br>각 분야가 1–2주의 대주제가 된다.</span>
+        <span class="lang-en lang-block">A term is shaped by <em>a handful of fields.</em><br>Each becomes the theme of one or two weeks.</span>
+      </h3>
+      <p class="fields-lede">
+        <span data-lang="ko">고정된 진도표 대신, 매 학기 운영진과 멤버가 함께 5–6개 분야를 고릅니다. 그 분야에 끌리는 멤버 2–3명이 그 주의 발제자가 되고, 나머지 멤버는 그 주제에 대해 미리 읽고 질문을 들고 옵니다. 발제자가 이끌고, 임원이 사회를 보고, 모두가 답을 찾는 자리입니다, 강의가 아니라 <em>inquiry exchange</em>.</span>
+        <span data-lang="en">Instead of a fixed syllabus, each term we and our members together pick five or six fields. Two or three members drawn to a given field present that week; the rest come having read around the topic and bring questions. Presenters lead, execs facilitate, everyone arrives prepared, this is not a lecture series. It is an <em>inquiry exchange.</em></span>
+      </p>
+    </div>
+
+    <div class="fields-grid">
+      <article class="field">
+        <div class="field-tag"><span data-lang="ko">철학</span><span data-lang="en">Philosophy</span></div>
+        <h4 class="field-q"><span data-lang="ko">생각하지 않는 것이 생각할 수 있는가?</span><span data-lang="en">Can something that does not think have thoughts?</span></h4>
+        <p class="field-body"><span data-lang="ko">의식, 의도, 이해의 정의, 그리고 LLM이 그 어디에 있는가. Searle의 중국어 방, Dennett의 지향성, 현대 철학자들의 대응.</span><span data-lang="en">Consciousness, intent, understanding, and where an LLM sits among them. Searle's Chinese Room, Dennett's intentional stance, current philosophical replies.</span></p>
+      </article>
+
+      <article class="field">
+        <div class="field-tag"><span data-lang="ko">수학</span><span data-lang="en">Mathematics</span></div>
+        <h4 class="field-q"><span data-lang="ko">왜 attention은 그런 모양인가?</span><span data-lang="en">Why does attention have that exact shape?</span></h4>
+        <p class="field-body"><span data-lang="ko">선형대수와 확률이 모델 안에서 실제로 어떻게 작동하는지. softmax, dot product, normalization, 직관과 유도.</span><span data-lang="en">How linear algebra and probability actually behave inside a model. Softmax, dot product, normalization, intuition and derivation.</span></p>
+      </article>
+
+      <article class="field">
+        <div class="field-tag"><span data-lang="ko">컴퓨터 과학</span><span data-lang="en">Computer Science</span></div>
+        <h4 class="field-q"><span data-lang="ko">한 모델은 어떻게 한 칩 위에서 살아 움직이는가?</span><span data-lang="en">How does a model actually run on a chip?</span></h4>
+        <p class="field-body"><span data-lang="ko">GPU 메모리, 양자화, 토크나이저, 추론 최적화. 추상에서 실제 하드웨어로 내려가는 길.</span><span data-lang="en">GPU memory, quantization, tokenizers, inference optimization. The path from abstraction down to actual silicon.</span></p>
+      </article>
+
+      <article class="field">
+        <div class="field-tag"><span data-lang="ko">물리 · 자연과학</span><span data-lang="en">Physics &amp; Natural Sciences</span></div>
+        <h4 class="field-q"><span data-lang="ko">AI는 자연 법칙을 새로 발견할 수 있는가?</span><span data-lang="en">Can AI discover new laws of nature?</span></h4>
+        <p class="field-body"><span data-lang="ko">AlphaFold, neural network potentials, symbolic regression. 과학 자체가 AI에 의해 어떻게 다시 쓰이고 있는가.</span><span data-lang="en">AlphaFold, neural network potentials, symbolic regression. How science itself is being rewritten by machine learning.</span></p>
+      </article>
+
+      <article class="field">
+        <div class="field-tag"><span data-lang="ko">생물 · 의학</span><span data-lang="en">Biology &amp; Medicine</span></div>
+        <h4 class="field-q"><span data-lang="ko">단백질 접힘 다음에는 무엇이 풀리는가?</span><span data-lang="en">After protein folding, what comes apart next?</span></h4>
+        <p class="field-body"><span data-lang="ko">의료 진단 AI의 한계, 신약 개발, 유전체 분석. 임상에서 통계가 멈추는 자리.</span><span data-lang="en">Limits of medical diagnostic AI, drug discovery, genomic analysis. Where statistics stops working in clinic.</span></p>
+      </article>
+
+      <article class="field">
+        <div class="field-tag"><span data-lang="ko">로보틱스 · 피지컬 AI</span><span data-lang="en">Robotics &amp; Physical AI</span></div>
+        <h4 class="field-q"><span data-lang="ko">AI는 왜 손가락을 어려워하는가?</span><span data-lang="en">Why do AI systems struggle with hands?</span></h4>
+        <p class="field-body"><span data-lang="ko">화면 안의 모델과 세상 속 모델은 다르다. 센서, 액추에이터, 시뮬레이션과 현실 사이의 간극.</span><span data-lang="en">A model in a screen and a model in the world are not the same. Sensors, actuators, the gap between simulation and reality.</span></p>
+      </article>
+
+      <article class="field">
+        <div class="field-tag"><span data-lang="ko">언어 · 인지</span><span data-lang="en">Language &amp; Cognition</span></div>
+        <h4 class="field-q"><span data-lang="ko">한국어 높임말은 왜 LLM에게 어려운가?</span><span data-lang="en">Why are Korean honorifics hard for LLMs?</span></h4>
+        <p class="field-body"><span data-lang="ko">언어학, 인지과학, 언어모델 안의 표상. 토큰이 의미를 가지는 방식, 그리고 그것이 무너지는 자리.</span><span data-lang="en">Linguistics, cognitive science, representation inside language models. How tokens come to mean things, and where that breaks down.</span></p>
+      </article>
+
+      <article class="field">
+        <div class="field-tag"><span data-lang="ko">사회 · 윤리</span><span data-lang="en">Society &amp; Ethics</span></div>
+        <h4 class="field-q"><span data-lang="ko">AI는 누구의 이익을 정렬하는가?</span><span data-lang="en">Whose interests does AI align with?</span></h4>
+        <p class="field-body"><span data-lang="ko">알고리즘 편향, 노동의 변화, 정렬 문제. "정렬되어야 한다"고 말할 때 우리가 정확히 무엇을 말하는지.</span><span data-lang="en">Algorithmic bias, the future of labor, the alignment problem. What we mean exactly when we say something "should be aligned."</span></p>
+      </article>
+
+      <article class="field">
+        <div class="field-tag"><span data-lang="ko">경제 · 금융</span><span data-lang="en">Economics &amp; Finance</span></div>
+        <h4 class="field-q"><span data-lang="ko">AI는 시장을 더 효율적으로 만드는가, 더 취약하게 만드는가?</span><span data-lang="en">Does AI make markets more efficient, or more fragile?</span></h4>
+        <p class="field-body"><span data-lang="ko">트레이딩 알고리즘, 위험 모델, 자본 배분의 자동화. 잘 작동할 때와 동시에 망가질 때.</span><span data-lang="en">Trading algorithms, risk models, automated capital allocation. What works well, and what breaks at the same time.</span></p>
+      </article>
+
+      <article class="field">
+        <div class="field-tag"><span data-lang="ko">예술 · 미디어</span><span data-lang="en">Art &amp; Media</span></div>
+        <h4 class="field-q"><span data-lang="ko">생성형 AI 시대에 저자는 누구인가?</span><span data-lang="en">Who is the author in the age of generative AI?</span></h4>
+        <p class="field-body"><span data-lang="ko">이미지, 음악, 글에서 인간의 자리. 저작권, 표절, 창의성의 정의가 다시 그려지는 자리.</span><span data-lang="en">The human place in image, music, and writing. Where copyright, plagiarism, and the definition of creativity are being redrawn.</span></p>
+      </article>
+
+      <article class="field">
+        <div class="field-tag"><span data-lang="ko">신앙 · 의미</span><span data-lang="en">Faith &amp; Meaning</span></div>
+        <h4 class="field-q"><span data-lang="ko">AI 시대에 인간이 된다는 것은 무엇인가?</span><span data-lang="en">What does it mean to be human in an age of AI?</span></h4>
+        <p class="field-body"><span data-lang="ko">기술이 빠르게 변하는 시대의 인간의 존엄, 종교적 전통, 의미의 자리. 답하기 어려운 질문을 회피하지 않는다.</span><span data-lang="en">Human dignity, religious traditions, and the place of meaning in a time of accelerating technology. We do not avoid the hard questions.</span></p>
+      </article>
+
+      <article class="field">
+        <div class="field-tag"><span data-lang="ko">정책 · 거버넌스</span><span data-lang="en">Policy &amp; Governance</span></div>
+        <h4 class="field-q"><span data-lang="ko">한 국가는 AI를 어떻게 규제할 수 있는가?</span><span data-lang="en">How can a country regulate AI?</span></h4>
+        <p class="field-body"><span data-lang="ko">EU AI Act, 미국 행정명령, 한국의 제도. 규제는 무엇을 할 수 있고 무엇을 할 수 없는가.</span><span data-lang="en">The EU AI Act, US executive orders, Korea's evolving framework. What regulation can and cannot do.</span></p>
+      </article>
+    </div>
+
+    <!-- How a session actually runs -->
+    <div class="session-shape">
+      <div class="ss-mark">
+        <span data-lang="ko">한 세션의 모양</span>
+        <span data-lang="en">The shape of a session</span>
+      </div>
+      <div class="ss-grid">
+        <article class="ss-step">
+          <div class="ss-num">01</div>
+          <h4 class="ss-name"><span data-lang="ko">발제자 2–3명이 이끈다</span><span data-lang="en">Two or three presenters lead</span></h4>
+          <p class="ss-desc"><span data-lang="ko">그 분야에 가장 끌리는 멤버가 자원합니다. 발제 자체가 본인의 학습입니다, 가르치면서 가장 많이 배웁니다.</span><span data-lang="en">Members drawn to the field volunteer to present. The act of presenting is itself how they learn, you understand most when you have to explain.</span></p>
+        </article>
+        <article class="ss-step">
+          <div class="ss-num">02</div>
+          <h4 class="ss-name"><span data-lang="ko">비발제자도 준비해 온다</span><span data-lang="en">Non-presenters arrive prepared</span></h4>
+          <p class="ss-desc"><span data-lang="ko">사전 자료 한두 편을 읽고, 본인의 질문을 적어 옵니다. 호기심으로 들어오되 빈손으로 들어오지 않습니다.</span><span data-lang="en">Members read one or two pieces ahead of time and bring written questions. You arrive with curiosity, but not empty-handed.</span></p>
+        </article>
+        <article class="ss-step">
+          <div class="ss-num">03</div>
+          <h4 class="ss-name"><span data-lang="ko">임원이 사회를 본다</span><span data-lang="en">Execs facilitate</span></h4>
+          <p class="ss-desc"><span data-lang="ko">발제 → 토론 → 더 깊은 질문 → 다음 주의 끈. 임원은 답을 주지 않고, 흐름을 만듭니다.</span><span data-lang="en">Presentation → discussion → deeper questions → a thread for next week. Execs do not give answers; they shape the flow.</span></p>
+        </article>
+        <article class="ss-step">
+          <div class="ss-num">04</div>
+          <h4 class="ss-name"><span data-lang="ko">기록은 Library로</span><span data-lang="en">Notes go to the Library</span></h4>
+          <p class="ss-desc"><span data-lang="ko">발제 슬라이드, 토론에서 나온 질문, 미해결 가지들이 짧은 글로 정리되어 Archive에 올라갑니다.</span><span data-lang="en">Slides, questions raised, unresolved threads, all written up briefly and posted to the Archive.</span></p>
+        </article>
       </div>
     </div>
+
+  </div>
+</section>
+
+<!-- ======================== ACTIVITIES & EVENTS ======================== -->
+<section id="activities">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="section-num">§ 06 / Activities &amp; Events</div>
+      <div>
+        <h2 class="section-title">
+          <span class="lang-ko lang-block">매주 모임 너머로.<br><em>학기를 정의하는 여섯 가지.</em></span>
+          <span class="lang-en lang-block">Beyond the weekly meeting.<br><em>The six things that define a term.</em></span>
+        </h2>
+        <p class="section-lede">
+          <span data-lang="ko">Six-Day Cycle은 매주 일어납니다. 그 위에 학기를 정의하는 큰 활동들이 있습니다. 한 권의 교과서, 학기말 심포지엄, 본인 자동화 프로젝트, 1년 사이클의 마지막을 닫는 Showcase Night, 그리고 중학생 워크샵.</span>
+          <span data-lang="en">The Six-Day Cycle runs every week. Above it sit the larger activities that define a term: a shared textbook, a public symposium, a personal automation project, the Showcase Night that closes the year, and middle-school workshops.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="activities-grid">
+      <article class="activity">
+        <div class="activity-tag activity-tag-p0">P0 · <span data-lang="ko">필수</span><span data-lang="en">Core</span></div>
+        <div class="activity-cadence"><span data-lang="ko">학기당 1회</span><span data-lang="en">Once per term</span></div>
+        <h3 class="activity-name"><span data-lang="ko">MATRIX Symposium</span><span data-lang="en">MATRIX Symposium</span></h3>
+        <p class="activity-desc"><span data-lang="ko">학기 중 8-10명의 멤버가 12분 발표 + 5분 Q&amp;A. 외부 게스트(KAIST/SNU 대학원생)가 Zoom 패널로 참여. 청중 투표로 "Most Asked-About Question" 시상. 모든 발표 영상이 1주일 안에 Library에 업로드.</span><span data-lang="en">Eight to ten members deliver 12-minute talks with five-minute Q&amp;A. An external researcher joins by Zoom as panelist. Audience votes on a "Most Asked-About Question" award. Every talk lands in the Library within a week.</span></p>
+      </article>
+
+      <article class="activity">
+        <div class="activity-tag activity-tag-p0">P0 · <span data-lang="ko">필수</span><span data-lang="en">Core</span></div>
+        <div class="activity-cadence"><span data-lang="ko">매주 / 격주</span><span data-lang="en">Weekly / biweekly</span></div>
+        <h3 class="activity-name"><span data-lang="ko">Automation Lab</span><span data-lang="en">Automation Lab</span></h3>
+        <p class="activity-desc"><span data-lang="ko">Build Day의 일부. 멤버 각자가 "내가 매일 쓸 작은 것"을 vibe coding으로 build, Anki 변환기, IB 시험 캘린더 봇, 한국어 뉴스 영어 요약 봇 등. 결과물이 본인에게 즉시 쓸모 있고, GitHub에 본인 이름으로 영구 저장.</span><span data-lang="en">Part of Build Day. Each member builds something small they personally use, an Anki converter, an IB exam calendar bot, a Korean-news summarizer. The result is immediately useful, and it lives permanently on GitHub under their name.</span></p>
+      </article>
+
+      <article class="activity">
+        <div class="activity-tag activity-tag-p0">P0 · <span data-lang="ko">필수</span><span data-lang="en">Core</span></div>
+        <div class="activity-cadence"><span data-lang="ko">연 1회 · 4월 중하순</span><span data-lang="en">Annual · mid-to-late April</span></div>
+        <h3 class="activity-name"><span data-lang="ko">Showcase Night</span><span data-lang="en">Showcase Night</span></h3>
+        <p class="activity-desc"><span data-lang="ko">한 해 사이클의 마지막을 닫는 자리. 5월 결성 후 본격 활동을 거쳐, 다음 해 4월 중하순에 1년간의 결과물을 발표합니다. 모든 활동 멤버가 발표자로 참여합니다. Gallery format으로 각자의 작업물(영상, 데모, 코드, 글)이 전시되고, 모두가 무대에서 한 번씩 발표합니다. 별도로 학교 행정 승인 절차를 거쳐 학기 일정에 맞춰 진행됩니다.</span><span data-lang="en">The closing event of a one-year cycle. After forming in May and a full year of activity, we present what we built in mid-to-late April the following year. Every active member presents. Gallery format displays each member's work (videos, demos, code, writing), and every member takes the stage. The event runs subject to school administrative approval and term scheduling.</span></p>
+      </article>
+
+      <article class="activity">
+        <div class="activity-tag activity-tag-p1">P1 · <span data-lang="ko">발전</span><span data-lang="en">Pursued</span></div>
+        <div class="activity-cadence"><span data-lang="ko">학기당 4회</span><span data-lang="en">Four times per term</span></div>
+        <h3 class="activity-name"><span data-lang="ko">Middle School Bridge</span><span data-lang="en">Middle School Bridge</span></h3>
+        <p class="activity-desc"><span data-lang="ko">MATRIX 멤버가 SFS 중학생(G6-G8) 대상으로 30분 워크샵. 주제: "AI는 어떻게 글을 쓸까", "왜 AI는 손가락을 못 그리나", "수학 없이 신경망 이해하기". 짧고 인터랙티브한 데모 위주. SFS의 어떤 클럽도 cross-divisional teaching을 하지 않습니다.</span><span data-lang="en">MATRIX members run 30-minute workshops for SFS Middle School students (G6–G8). Topics like "How AI writes," "Why AI struggles with hands," "Neural networks without the math." Short, hands-on, demo-driven. No other SFS club operates a cross-divisional teaching pipeline.</span></p>
+      </article>
+
+      <article class="activity">
+        <div class="activity-tag activity-tag-p1">P1 · <span data-lang="ko">발전</span><span data-lang="en">Pursued</span></div>
+        <div class="activity-cadence"><span data-lang="ko">분기당 1회</span><span data-lang="en">Quarterly</span></div>
+        <h3 class="activity-name"><span data-lang="ko">External Sprints &amp; Hackathons</span><span data-lang="en">External Sprints &amp; Hackathons</span></h3>
+        <p class="activity-desc"><span data-lang="ko">Apart Research alignment sprints (분기 1회, 무료, 온라인, 클럽 전원 참여 권장), MIT Global AI Hackathon (연 1회, 무료, 온라인, 팀 1-2개 출전), 한국 hackathon들 (선발 1팀). Builder 트랙 멤버에게 외부 검증 가능한 결과물을 만드는 경로.</span><span data-lang="en">Apart Research alignment sprints (quarterly, free, online, open to the whole club), MIT Global AI Hackathon (annual, free, virtual, one or two teams), Korean hackathons (one selected team). For Builder-track members, a route to externally verifiable output.</span></p>
+      </article>
+    </div>
+
   </div>
 </section>
 
@@ -1469,7 +2519,7 @@ html[lang="en"] body { font-family: var(--sans); }
 <section id="tracks">
   <div class="wrap reveal">
     <div class="section-head">
-      <div class="section-num">§ 04 / Tracks</div>
+      <div class="section-num">§ 07 / Tracks</div>
       <div>
         <h2 class="section-title">
           <span class="lang-ko lang-block">세 갈래 길.<br><em>모두에게 다른 깊이.</em></span>
@@ -1521,7 +2571,7 @@ html[lang="en"] body { font-family: var(--sans); }
     <div class="advisor">
       <div class="advisor-quote">
         <span data-lang="ko">"학생이 자기 호기심으로 질문을 만들고, 자기 손으로 답을 찾고, 자기 이름으로 결과를 남길 때, 그것이 우리가 학생들에게 줄 수 있는 가장 정직한 출발점이다."</span>
-        <span data-lang="en">"When a student frames their own question, finds their own answer, and signs their own name to the result — that is the most honest starting point we can give them."</span>
+        <span data-lang="en">"When a student frames their own question, finds their own answer, and signs their own name to the result, that is the most honest starting point we can give them."</span>
       </div>
       <div class="advisor-meta">
         <div class="eyebrow" style="margin-bottom: 12px;">
@@ -1549,7 +2599,7 @@ html[lang="en"] body { font-family: var(--sans); }
 <section id="library">
   <div class="wrap reveal">
     <div class="section-head">
-      <div class="section-num">§ 05 / Archive</div>
+      <div class="section-num">§ 08 / Archive</div>
       <div>
         <h2 class="section-title">
           <span class="lang-ko lang-block">학습은 사라지지 않고,<br><em>기록으로 남는다.</em></span>
@@ -1562,32 +2612,43 @@ html[lang="en"] body { font-family: var(--sans); }
       </div>
     </div>
 
+    <div class="archive-notice">
+      <div class="archive-notice-mark">
+        <span data-lang="ko">예시</span>
+        <span data-lang="en">Illustrative</span>
+      </div>
+      <p class="archive-notice-body">
+        <span data-lang="ko">아래는 멤버들이 다룰 수 있는 발제 주제의 예시입니다. 클럽이 본격 활동을 시작하면, 실제 멤버 발표와 글이 이 자리에 그대로 들어와 영구 Archive로 이어집니다.</span>
+        <span data-lang="en">Below are illustrative examples of topics members might present. Once the club is active, real talks and writings will replace these in the same slots, becoming the permanent Archive.</span>
+      </p>
+    </div>
+
     <div class="library">
       <article class="lib-card">
         <span class="lib-tag t-talk">Talk</span>
         <h5><span data-lang="ko">왜 Attention이 이겼는가</span><span data-lang="en">Why Attention Won</span></h5>
-        <p class="lib-desc"><span data-lang="ko">recurrence 없이 attention만으로 더 병렬적이고 학습 효율적인 구조를 만든 이유를, 수학 직관으로 설명한다.</span><span data-lang="en">How attention alone, without recurrence, produced a more parallel and trainable architecture — explained from the math up.</span></p>
+        <p class="lib-desc"><span data-lang="ko">recurrence 없이 attention만으로 더 병렬적이고 학습 효율적인 구조를 만든 이유를, 수학 직관으로 설명한다.</span><span data-lang="en">How attention alone, without recurrence, produced a more parallel and trainable architecture, explained from the math up.</span></p>
         <div class="lib-meta"><span>Reading Circle</span><span>v0.1 · Spring 2026</span></div>
       </article>
 
       <article class="lib-card">
         <span class="lib-tag t-talk">Talk</span>
         <h5><span data-lang="ko">Momentum은 왜 실제로 작동하는가</span><span data-lang="en">Why Momentum Really Works</span></h5>
-        <p class="lib-desc"><span data-lang="ko">"빨라지는 공" 비유에서 끝내지 않고, curvature와 step-size 관점으로 다시 설명한다.</span><span data-lang="en">Past the "rolling ball" intuition, into curvature and step-size — what the optimizer is really doing.</span></p>
+        <p class="lib-desc"><span data-lang="ko">"빨라지는 공" 비유에서 끝내지 않고, curvature와 step-size 관점으로 다시 설명한다.</span><span data-lang="en">Past the "rolling ball" intuition, into curvature and step-size, what the optimizer is really doing.</span></p>
         <div class="lib-meta"><span>Reading Circle</span><span>v0.1 · Spring 2026</span></div>
       </article>
 
       <article class="lib-card">
         <span class="lib-tag t-talk">Talk</span>
         <h5><span data-lang="ko">Alignment는 성능과 다른 문제인가</span><span data-lang="en">Is Alignment Distinct from Capability?</span></h5>
-        <p class="lib-desc"><span data-lang="ko">harmlessness, self-critique, AI feedback. "잘하는 모델"과 "통제되는 모델" 사이의 거리를 재본다.</span><span data-lang="en">Harmlessness, self-critique, AI feedback — measuring the distance between a capable model and a steerable one.</span></p>
+        <p class="lib-desc"><span data-lang="ko">harmlessness, self-critique, AI feedback. "잘하는 모델"과 "통제되는 모델" 사이의 거리를 재본다.</span><span data-lang="en">Harmlessness, self-critique, AI feedback, measuring the distance between a capable model and a steerable one.</span></p>
         <div class="lib-meta"><span>Symposium</span><span>v0.1 · Spring 2026</span></div>
       </article>
 
       <article class="lib-card">
         <span class="lib-tag t-build">Build</span>
         <h5><span data-lang="ko">한국어 높임말 일관성 벤치마크</span><span data-lang="en">Korean Honorific Consistency Benchmark</span></h5>
-        <p class="lib-desc"><span data-lang="ko">여러 프롬프트 상황에서 존댓말과 반말 안정성을 측정하는 mini benchmark. 한국어 LLM 평가의 빈자리를 채우는 시도.</span><span data-lang="en">A small benchmark measuring honorific stability of LLMs across prompt conditions — filling a gap in Korean-language evaluation.</span></p>
+        <p class="lib-desc"><span data-lang="ko">여러 프롬프트 상황에서 존댓말과 반말 안정성을 측정하는 mini benchmark. 한국어 LLM 평가의 빈자리를 채우는 시도.</span><span data-lang="en">A small benchmark measuring honorific stability of LLMs across prompt conditions, filling a gap in Korean-language evaluation.</span></p>
         <div class="lib-meta"><span>Builder Track</span><span>WIP</span></div>
       </article>
 
@@ -1615,17 +2676,177 @@ html[lang="en"] body { font-family: var(--sans); }
       <article class="lib-card">
         <span class="lib-tag t-paper">Paper</span>
         <h5>Understanding RL Vision</h5>
-        <p class="lib-desc"><span data-lang="ko">attribution과 interpretability의 입문 글. 내부 표현이 어떻게 의사결정을 만드는지 시각적으로 따라간다.</span><span data-lang="en">An entry point to attribution and interpretability — tracing how internal representations produce decisions.</span></p>
+        <p class="lib-desc"><span data-lang="ko">attribution과 interpretability의 입문 글. 내부 표현이 어떻게 의사결정을 만드는지 시각적으로 따라간다.</span><span data-lang="en">An entry point to attribution and interpretability, tracing how internal representations produce decisions.</span></p>
         <div class="lib-meta"><span>Hilton et al., 2020</span><span>distill.pub</span></div>
       </article>
 
       <article class="lib-card">
         <span class="lib-tag t-paper">Paper</span>
         <h5><span data-lang="ko">Constitutional AI 해설</span><span data-lang="en">Annotated · Constitutional AI</span></h5>
-        <p class="lib-desc"><span data-lang="ko">alignment와 oversight의 대표 입문. 사람의 라벨 없이 AI feedback으로 harmlessness를 학습시키는 절차를 따라간다.</span><span data-lang="en">A walk-through of training harmlessness from AI feedback, without human labels — a canonical entry point to alignment.</span></p>
+        <p class="lib-desc"><span data-lang="ko">alignment와 oversight의 대표 입문. 사람의 라벨 없이 AI feedback으로 harmlessness를 학습시키는 절차를 따라간다.</span><span data-lang="en">A walk-through of training harmlessness from AI feedback, without human labels, a canonical entry point to alignment.</span></p>
         <div class="lib-meta"><span>Bai et al., 2022</span><span>anthropic.com</span></div>
       </article>
     </div>
+  </div>
+</section>
+
+<!-- ======================== WHY NOW · GAPS ======================== -->
+<section id="why-now">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="section-num">§ 09 / Why Now</div>
+      <div>
+        <h2 class="section-title">
+          <span class="lang-ko lang-block">SFS 안에서 우리가 채우는 <em>세 개의 빈 자리.</em></span>
+          <span class="lang-en lang-block">The <em>three empty seats</em> we fill at SFS.</span>
+        </h2>
+        <p class="section-lede">
+          <span data-lang="ko">우리는 클럽이 필요한 이유를 만들지 않습니다. 그 이유들이 이미 있습니다, 우리는 그저 그것들을 SFS 안에서 분명하게 명명할 뿐입니다.</span>
+          <span data-lang="en">We do not invent reasons for this club to exist. They are already here, we only name them out loud, inside SFS.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="gaps-grid">
+      <article class="gap">
+        <div class="gap-num">Gap 01</div>
+        <div class="gap-content">
+          <h3 class="gap-title"><span data-lang="ko">AI는 학생 생활 어디에나 있고, 학생 학습에는 거의 없다.</span><span data-lang="en">AI is everywhere in student life and almost nowhere in student learning.</span></h3>
+          <p class="gap-body"><span data-lang="ko">SFS 학생 거의 전원이 매주 AI 도구를 사용합니다, 글쓰기, 코딩, 문제 풀이. 그러나 이 도구들이 <em>실제로 어떻게 작동하는지</em>를 가르치는 구조화된 자리는 SFS에 없습니다. AP CS는 알고리즘을 다루지 현대 머신러닝을 다루지 않습니다. 커리큘럼은 이 시간 안에 따라잡지 못합니다.</span><span data-lang="en">Nearly every SFS student uses AI tools weekly, for writing, coding, problem-solving. There is no structured forum at SFS where students learn how those tools actually work. AP Computer Science covers algorithms, not modern machine learning. Curriculum cannot close this gap on the timeline that matters.</span></p>
+        </div>
+      </article>
+
+      <article class="gap">
+        <div class="gap-num">Gap 02</div>
+        <div class="gap-content">
+          <h3 class="gap-title"><span data-lang="ko">탐구의 판이 없으면 builder도 자라지 않는다.</span><span data-lang="en">Without a place to try things, no one becomes a builder.</span></h3>
+          <p class="gap-body"><span data-lang="ko">AI의 builder나 researcher가 되기 위해서는 자기 관심 분야를 직접 골라 탐구하고, 친구들과 의견을 나누고, 작은 실험을 끝까지 끌고 가 보는 경험이 필요합니다. 호기심을 발전시키고, 부담 없이 실패해 보고, 기회를 부여받고, 옆에서 같이 배우는 또래가 있는 자리. 그런 판이 깔려 있지 않으면 학생은 흥미만 가진 채로 학년을 넘기게 됩니다. MATRIX는 그 판을 깔아 멤버 각자가 builder와 researcher의 경로로 자라나도록 돕습니다.</span><span data-lang="en">Becoming an AI builder or researcher takes a place to choose your own area, try things in it, talk them through with peers, and carry small experiments through to the end. A place where curiosity can grow, where it is safe to fail, where chances are offered, where there are peers learning beside you. Without that, students simply move up a grade still holding only the interest. MATRIX is built to be that place, so each member can grow along the builder and researcher paths.</span></p>
+        </div>
+      </article>
+
+      <article class="gap">
+        <div class="gap-num">Gap 03</div>
+        <div class="gap-content">
+          <h3 class="gap-title"><span data-lang="ko">SFS에는 지속적으로 공개되는 AI 결과물이 없다.</span><span data-lang="en">SFS has no continuous, public stream of AI work.</span></h3>
+          <p class="gap-body"><span data-lang="ko">기존 SFS 클럽들은 대회 준비, 서비스 활동, 정기 인쇄물 발행 등 각자의 강점을 가지고 있습니다. 그러나 어느 곳에서도 AI를 한 주제로 깊게 다루며, YouTube, GitHub, 검색 가능한 기술 블로그를 통해, 학생 작업물을 지속적으로 공개하는 모델은 운영되지 않습니다. MATRIX 멤버는 본인 이름으로 서명한 작업물을 SFS 이름과 함께 영구히 검색되는 웹에 게시합니다.</span><span data-lang="en">Existing SFS clubs each play to their own strengths: competition preparation, service work, periodic publications. None operates a model where a single subject like AI is taken in depth and where student work is published continuously to YouTube, GitHub, and a searchable technical blog. MATRIX members produce work they sign their own names to, kept on the searchable web under the SFS name.</span></p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== TEAM · LEADERSHIP ======================== -->
+<section id="team">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="section-num">§ 10 / Team</div>
+      <div>
+        <h2 class="section-title">
+          <span class="lang-ko lang-block">2026–27 <em>창립 임원진.</em></span>
+          <span class="lang-en lang-block">The 2026–27 <em>founding executive team.</em></span>
+        </h2>
+        <p class="section-lede">
+          <span data-lang="ko">MATRIX는 SFS High School 학생들이 자율적으로 운영합니다. 클럽의 첫 임원진이 정관을 쓰고, 첫 학기 사이클을 운영하며, 후계자를 직접 훈련합니다.</span>
+          <span data-lang="en">MATRIX is run by SFS High School students. The founding team writes the constitution, runs the first cycle, and trains its successors.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="team-grid">
+      <article class="team-card">
+        <div class="team-role"><span data-lang="ko">회장 · No 1</span><span data-lang="en">President · No 1</span></div>
+        <h3 class="team-name">Dawon Suh</h3>
+        <p class="team-focus"><span data-lang="ko">전반적 기획과 방향 설정. 사이클 큐레이션, 임원진 조율, 대외 대표. 새 이니셔티브를 발의하고 학기 사이클을 끝까지 끌고 갑니다.</span><span data-lang="en">Sets overall direction. Curates the cycle, coordinates the executive team, represents the club externally. Proposes new initiatives and carries the term's cycle through to its end.</span></p>
+      </article>
+
+      <article class="team-card">
+        <div class="team-role"><span data-lang="ko">부회장 · No 2</span><span data-lang="en">Vice President · No 2</span></div>
+        <h3 class="team-name">Liam Yoon</h3>
+        <p class="team-focus"><span data-lang="ko">회장과 긴밀히 협력하여 이벤트를 함께 기획·운영하고, 외부 강연 outreach를 함께 짭니다. 회장 부재 시 리더십 포지션. Symposium, Showcase, Build Day 운영의 공동 책임자.</span><span data-lang="en">Works closely with the President to plan and run events and shape speaker outreach together. Steps into the leadership role when the President is unavailable. Co-owns Symposium, Showcase, and Build Day operations.</span></p>
+      </article>
+
+      <article class="team-card">
+        <div class="team-role"><span data-lang="ko">총무 · No 3</span><span data-lang="en">Secretary · No 3</span></div>
+        <h3 class="team-name">David Oh</h3>
+        <p class="team-focus"><span data-lang="ko">출석 관리와 회의록, 일정 공지, 멤버 커뮤니케이션. 클럽 운영의 일상 행정을 책임집니다.</span><span data-lang="en">Attendance, minutes, scheduling, and member communications. Owns the day-to-day administration that keeps the club running.</span></p>
+      </article>
+
+      <article class="team-card">
+        <div class="team-role"><span data-lang="ko">회계 · No 4</span><span data-lang="en">Treasurer · No 4</span></div>
+        <h3 class="team-name">Tyler Koo</h3>
+        <p class="team-focus"><span data-lang="ko">클럽 예산과 이벤트 비용 관리, API 크레딧과 도메인 등 외부 결제, 학교 클럽 협의회(Club Council)와의 연락 창구.</span><span data-lang="en">Owns the budget and event spending, manages external accounts (API credits, domain), and liaises with the school's Club Council.</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== PARTNERS & SPEAKERS ======================== -->
+<section id="partners">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="section-num">§ 11 / Speakers &amp; Outreach</div>
+      <div>
+        <h2 class="section-title">
+          <span class="lang-ko lang-block">우리가 누구를 모실 수 있을까.<br><em>가장 가까운 사람부터.</em></span>
+          <span class="lang-en lang-block">Who we can invite to talk.<br><em>Starting with the people closest to us.</em></span>
+        </h2>
+        <p class="section-lede">
+          <span data-lang="ko">학기당 외부 강연 1회를 목표로 합니다. 다만 우리는 클럽이 막 시작하는 단계이고, 외부 기관과의 컨택은 시간이 걸립니다. 따라서 가장 현실적인 경로부터, SFS 학부모 네트워크와 교사진의 추천, 시작합니다.</span>
+          <span data-lang="en">We aim for one external talk per term. We are also a club at its beginning, and external outreach takes time. So we start with the most realistic path, the SFS parent network and faculty introductions.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="partners-tiers">
+      <article class="tier">
+        <div class="tier-head">
+          <div class="tier-num">Path 01</div>
+          <div class="tier-name"><span data-lang="ko">학부모 네트워크</span><span data-lang="en">Parent network</span></div>
+        </div>
+        <p class="tier-body">
+          <span data-lang="ko">SFS 학부모 중 AI · 데이터 · 소프트웨어 분야에서 일하시는 분들에게 직접 연락드려 짧은 강연을 부탁드립니다. 같은 학교 가족이라는 신뢰가 첫 강연 한 회를 가능하게 만듭니다. 가장 빠르고, 가장 따뜻한 경로입니다.</span>
+          <span data-lang="en">We reach out to SFS parents who work in AI, data, or software, asking for a short talk. The trust of being part of the same school community is what makes the first invitation possible. The fastest and warmest path.</span>
+        </p>
+      </article>
+
+      <article class="tier">
+        <div class="tier-head">
+          <div class="tier-num">Path 02</div>
+          <div class="tier-name"><span data-lang="ko">교사진 추천</span><span data-lang="en">Faculty introductions</span></div>
+        </div>
+        <p class="tier-body">
+          <span data-lang="ko">SFS 수학·컴퓨터과학·과학 교사진의 학계 동료, 대학원 시절 인연, 또는 컨퍼런스에서 만난 연구자를 통해 학생용 강연을 부탁드립니다. 클럽이 단독으로 외부에 컨택하기보다 학교 내부의 신뢰 관계 위에서 시작합니다.</span>
+          <span data-lang="en">We ask SFS Mathematics, Computer Science, and Science faculty to introduce us to colleagues, former graduate-school connections, or conference acquaintances who would speak to students. We build on trust that already exists inside the school rather than knocking on doors alone.</span>
+        </p>
+      </article>
+
+      <article class="tier">
+        <div class="tier-head">
+          <div class="tier-num">Path 03</div>
+          <div class="tier-name"><span data-lang="ko">동문과 가까운 지인</span><span data-lang="en">Alumni and close contacts</span></div>
+        </div>
+        <p class="tier-body">
+          <span data-lang="ko">대학에서 AI·CS·수학을 전공하는 SFS 졸업생들에게 zoom 강연을 부탁드립니다. 모델 논문 한 편을 깊이 다루는 30분짜리 형식이 가장 효과적이라고 봅니다. 멀지 않고, 멤버에게 가까운 미래의 자기 모습을 보여줍니다.</span>
+          <span data-lang="en">We invite SFS alumni now studying AI, CS, or mathematics at university to give Zoom talks. A 30-minute format walking through one paper in depth tends to work best. Not far away, and a glimpse of where members might be in a few years.</span>
+        </p>
+      </article>
+
+      <article class="tier">
+        <div class="tier-head">
+          <div class="tier-num">Path 04</div>
+          <div class="tier-name"><span data-lang="ko">장기적 목표</span><span data-lang="en">Long-term aspiration</span></div>
+        </div>
+        <p class="tier-body">
+          <span data-lang="ko">시간이 지나 클럽이 자리를 잡고 공개 결과물이 쌓이면, 한국 안팎의 연구 기관에 정식 컨택을 시도해 볼 만하다고 봅니다. 무엇이 가능할지는 그때 가서 정직하게 보겠습니다, 지금은 약속하지 않습니다.</span>
+          <span data-lang="en">In time, once the club has settled and a body of public work has accumulated, formal outreach to research institutions in Korea and abroad becomes worth attempting. We will see honestly what is possible then, we are not promising it now.</span>
+        </p>
+      </article>
+    </div>
+
+    <p class="partners-note">
+      <span data-lang="ko">* 모든 outreach는 클럽 승인 후 SFS Leadership 채널을 통해 진행됩니다. 제출 시점 기준 확정된 강연은 없습니다.</span>
+      <span data-lang="en">* All outreach proceeds through SFS Leadership channels after club approval. No talks are confirmed at submission.</span>
+    </p>
   </div>
 </section>
 
@@ -1633,7 +2854,7 @@ html[lang="en"] body { font-family: var(--sans); }
 <section id="faq" style="padding-bottom:0;">
   <div class="wrap reveal">
     <div class="section-head">
-      <div class="section-num">§ 06 / FAQ</div>
+      <div class="section-num">§ 12 / FAQ</div>
       <div>
         <h2 class="section-title">
           <span data-lang="ko">자주 받는 질문</span>
@@ -1641,7 +2862,7 @@ html[lang="en"] body { font-family: var(--sans); }
         </h2>
         <p class="section-lede">
           <span data-lang="ko">엘리트 선발 모임이 아닌, 지적 호기심 기반 참여 모임입니다.</span>
-          <span data-lang="en">A participation-based community grounded in curiosity — not a selective elite group.</span>
+          <span data-lang="en">A participation-based community grounded in curiosity, not a selective elite group.</span>
         </p>
       </div>
     </div>
@@ -1651,7 +2872,7 @@ html[lang="en"] body { font-family: var(--sans); }
     <div class="wrap" style="padding:0;">
       <details>
         <summary><span data-lang="ko">코딩 경험이 없어도 되나요?</span><span data-lang="en">Do I need coding experience?</span></summary>
-        <p><span data-lang="ko">됩니다. 첫 축은 코딩 숙련이 아니라 선형대수, 확률, 최적화, 모델 직관입니다. 공개 교재도 이 순서를 취합니다. Listener 트랙은 코드를 한 줄도 쓰지 않고도 의미 있게 기여할 수 있도록 설계했습니다.</span><span data-lang="en">No. The first axis is not coding fluency but linear algebra, probability, optimization, and model intuition — the order canonical textbooks themselves follow. The Listener track is designed so a member can contribute meaningfully without writing a single line of code.</span></p>
+        <p><span data-lang="ko">됩니다. 첫 축은 코딩 숙련이 아니라 선형대수, 확률, 최적화, 모델 직관입니다. 공개 교재도 이 순서를 취합니다. Listener 트랙은 코드를 한 줄도 쓰지 않고도 의미 있게 기여할 수 있도록 설계했습니다.</span><span data-lang="en">No. The first axis is not coding fluency but linear algebra, probability, optimization, and model intuition, the order canonical textbooks themselves follow. The Listener track is designed so a member can contribute meaningfully without writing a single line of code.</span></p>
       </details>
       <details>
         <summary><span data-lang="ko">수학을 아주 잘해야 하나요?</span><span data-lang="en">Do I need to be strong at math?</span></summary>
@@ -1659,7 +2880,7 @@ html[lang="en"] body { font-family: var(--sans); }
       </details>
       <details>
         <summary><span data-lang="ko">발표는 꼭 해야 하나요?</span><span data-lang="en">Is presenting required?</span></summary>
-        <p><span data-lang="ko">예. MATRIX의 최소 단위는 "이해했다"가 아니라 "설명했다"입니다. clear explanation 자체가 연구 문화의 일부라고 봅니다. 발표 길이는 트랙별로 다릅니다 — Listener는 5분 코멘터리, Researcher는 8분 full talk.</span><span data-lang="en">Yes. The minimal unit at MATRIX is not "I understood it" but "I explained it." We treat clear explanation as part of the research culture itself. Length scales with track — five-minute commentary for Listener, eight-minute talk for Researcher.</span></p>
+        <p><span data-lang="ko">예. MATRIX의 최소 단위는 "이해했다"가 아니라 "설명했다"입니다. clear explanation 자체가 연구 문화의 일부라고 봅니다. 발표 길이는 트랙별로 다릅니다, Listener는 5분 코멘터리, Researcher는 8분 full talk.</span><span data-lang="en">Yes. The minimal unit at MATRIX is not "I understood it" but "I explained it." We treat clear explanation as part of the research culture itself. Length scales with track, five-minute commentary for Listener, eight-minute talk for Researcher.</span></p>
       </details>
       <details>
         <summary><span data-lang="ko">결과물의 저작권은 누구에게 있나요?</span><span data-lang="en">Who owns the work?</span></summary>
@@ -1667,7 +2888,7 @@ html[lang="en"] body { font-family: var(--sans); }
       </details>
       <details>
         <summary><span data-lang="ko">대입 포트폴리오로 제출해도 되나요?</span><span data-lang="en">Can I submit this work to college applications?</span></summary>
-        <p><span data-lang="ko">가능합니다. 다만 대학별 정책이 다르므로, 의미 있고 지원 맥락에 직접 관련 있는 작업만 선별해 넣는 편을 권합니다. MIT는 research·maker 포트폴리오를 optional material로 받습니다. 링크는 많을수록 좋은 것이 아니라 강할수록 좋습니다.</span><span data-lang="en">Yes — within each university's policy. We recommend submitting only work that is substantial and directly relevant to your application. MIT, for instance, accepts research and maker portfolios as optional material. Stronger links beat more links.</span></p>
+        <p><span data-lang="ko">가능합니다. 다만 대학별 정책이 다르므로, 의미 있고 지원 맥락에 직접 관련 있는 작업만 선별해 넣는 편을 권합니다. MIT는 research·maker 포트폴리오를 optional material로 받습니다. 링크는 많을수록 좋은 것이 아니라 강할수록 좋습니다.</span><span data-lang="en">Yes, within each university's policy. We recommend submitting only work that is substantial and directly relevant to your application. MIT, for instance, accepts research and maker portfolios as optional material. Stronger links beat more links.</span></p>
       </details>
       <details>
         <summary><span data-lang="ko">학년 제한이 있나요?</span><span data-lang="en">Are there grade restrictions?</span></summary>
@@ -1683,16 +2904,16 @@ html[lang="en"] body { font-family: var(--sans); }
     <div class="recruit-grid">
       <div>
         <span class="eyebrow">
-          <span data-lang="ko">§ 06 / Apply · 2026 봄학기 모집 · 2주 후 마감</span>
-          <span data-lang="en">§ 06 / Apply · Spring 2026 — closes in two weeks</span>
+          <span data-lang="ko">§ 13 / Apply · 2026 봄학기 모집 · 2주 후 마감</span>
+          <span data-lang="en">§ 13 / Apply · Spring 2026, closes in two weeks</span>
         </span>
         <h2>
           <span class="lang-ko lang-block">AI에 호기심이 있다면,<br><em>당신이 우리가 찾는 사람입니다.</em></span>
           <span class="lang-en lang-block">If you are curious about AI,<br><em>you are who we are looking for.</em></span>
         </h2>
         <p>
-          <span data-lang="ko">관심 분야는 무엇이든 좋습니다 — 수학, 코드, 글, 토론, 디자인, 윤리, 정책. 우리는 매주 함께 읽고, 만들고, 발표하고, 토론합니다. 자기주도 학습과 팀워크가 동시에 작동하는 모임입니다. 학년 제한, 사전 코딩 경험, 수학 점수 — 어느 것도 자격 요건이 아닙니다. 호기심과 꾸준함이면 충분합니다.</span>
-          <span data-lang="en">Whatever you bring — math, code, writing, debate, design, ethics, policy — there is a way in. Each week we read, build, present, and argue together. The community runs on self-directed learning and teamwork at once. No grade gate, no prior coding requirement, no math-score bar. Curiosity and consistency are enough.</span>
+          <span data-lang="ko">관심 분야는 무엇이든 좋습니다, 수학, 코드, 글, 토론, 디자인, 윤리, 정책. 우리는 매주 함께 읽고, 만들고, 발표하고, 토론합니다. 자기주도 학습과 팀워크가 동시에 작동하는 모임입니다. 학년 제한, 사전 코딩 경험, 수학 점수, 어느 것도 자격 요건이 아닙니다. 호기심과 꾸준함이면 충분합니다.</span>
+          <span data-lang="en">Whatever you bring, math, code, writing, debate, design, ethics, policy, there is a way in. Each week we read, build, present, and argue together. The community runs on self-directed learning and teamwork at once. No grade gate, no prior coding requirement, no math-score bar. Curiosity and consistency are enough.</span>
         </p>
 
         <div class="hero-actions" style="margin-top: 32px;">
@@ -1762,10 +2983,15 @@ html[lang="en"] body { font-family: var(--sans); }
         <h6><span data-lang="ko">사이트</span><span data-lang="en">The Site</span></h6>
         <ul>
           <li><a href="#mission"><span data-lang="ko">미션</span><span data-lang="en">Mission</span></a></li>
-          <li><a href="#approach"><span data-lang="ko">방법</span><span data-lang="en">Approach</span></a></li>
-          <li><a href="#curriculum"><span data-lang="ko">커리큘럼</span><span data-lang="en">Curriculum</span></a></li>
+          <li><a href="#philosophy"><span data-lang="ko">철학</span><span data-lang="en">Philosophy</span></a></li>
+          <li><a href="#builders-practice"><span data-lang="ko">빌더의 작업</span><span data-lang="en">Builder's Practice</span></a></li>
+          <li><a href="#curriculum"><span data-lang="ko">사이클</span><span data-lang="en">Cycle</span></a></li>
+          <li><a href="#activities"><span data-lang="ko">활동</span><span data-lang="en">Activities</span></a></li>
           <li><a href="#tracks"><span data-lang="ko">트랙</span><span data-lang="en">Tracks</span></a></li>
           <li><a href="#library"><span data-lang="ko">아카이브</span><span data-lang="en">Archive</span></a></li>
+          <li><a href="#why-now"><span data-lang="ko">왜 지금</span><span data-lang="en">Why now</span></a></li>
+          <li><a href="#team"><span data-lang="ko">팀</span><span data-lang="en">Team</span></a></li>
+          <li><a href="#partners"><span data-lang="ko">파트너</span><span data-lang="en">Partners</span></a></li>
           <li><a href="#join"><span data-lang="ko">지원하기</span><span data-lang="en">Apply</span></a></li>
         </ul>
       </div>
@@ -1801,69 +3027,6 @@ html[lang="en"] body { font-family: var(--sans); }
 "use strict";
 
 /* ============================================================================
-   CURRICULUM DATA — bilingual, JS-rendered for clean toggle
-   ============================================================================ */
-const curriculum = [
-  { wk: "01",
-    ko: ["Orientation: Builder의 시각", "사용자와 builder 시각의 차이 이해", "질문 맵 작성, 관심 트랙 배정"],
-    en: ["Orientation: A Builder's Perspective", "Distinguish user vs builder framings of AI", "Map questions, assign tracks"] },
-  { wk: "02",
-    ko: ["Linear Algebra I", "벡터, 행렬, 내적, 선형변환", "Foundations + 보드 문제 풀이"],
-    en: ["Linear Algebra I", "Vectors, matrices, inner products, linear maps", "Foundations + chalkboard problems"] },
-  { wk: "03",
-    ko: ["Linear Algebra II", "고유값, 분해, PCA 직관", "Reading Circle + 시각화"],
-    en: ["Linear Algebra II", "Eigenvalues, decompositions, PCA intuition", "Reading Circle + visualizations"] },
-  { wk: "04",
-    ko: ["Vector Calculus", "gradient, partial derivative, chain rule", "유도 연습 + 미니 과제"],
-    en: ["Vector Calculus", "Gradient, partial derivative, chain rule", "Derivation drills + mini-task"] },
-  { wk: "05",
-    ko: ["Probability for ML", "분포, 기대값, likelihood 감각", "오답 분석 + notebook"],
-    en: ["Probability for ML", "Distributions, expectation, likelihood sense", "Error analysis + notebook"] },
-  { wk: "06",
-    ko: ["Optimization", "gradient descent, momentum 직관", "Distill explainer 토론"],
-    en: ["Optimization", "Gradient descent, momentum intuition", "Discussion: Distill explainers"] },
-  { wk: "07",
-    ko: ["Models Meet Data", "train/val/test, baseline 설계", "간단한 예측 모델 구축"],
-    en: ["Models Meet Data", "Train/val/test, designing a baseline", "Build a simple predictive model"] },
-  { wk: "08",
-    ko: ["Neural Networks", "MLP, backprop, loss 설계", "scratch 구현 또는 Colab 실습"],
-    en: ["Neural Networks", "MLPs, backprop, loss design", "From-scratch or Colab implementation"] },
-  { wk: "09",
-    ko: ["Attention & Transformer", "self-attention과 병렬화의 의미", "원논문 정독 + mini demo"],
-    en: ["Attention & Transformer", "Why self-attention parallelizes", "Read the source paper + mini demo"] },
-  { wk: "10",
-    ko: ["Evaluation & Benchmark", "metric, error analysis, failure mode", "사례 비교, peer review"],
-    en: ["Evaluation & Benchmark", "Metrics, error analysis, failure modes", "Case comparison, peer review"] },
-  { wk: "11",
-    ko: ["Interpretability & Alignment", "내부 표현, attribution, alignment 질문", "Reading Circle + debate"],
-    en: ["Interpretability & Alignment", "Internal representations, attribution, alignment", "Reading Circle + debate"] },
-  { wk: "12",
-    ko: ["Symposium Sprint", "발표·보고서·아카이브 업로드", "공개 발표, 피드백, 반영"],
-    en: ["Symposium Sprint", "Talks, reports, archive uploads", "Public talks, feedback, revision"] },
-];
-
-const headers = {
-  ko: ["주차", "주제", "학습 목표", "활동"],
-  en: ["Week", "Topic", "Learning goal", "Activity"]
-};
-
-function renderCurriculum() {
-  const lang = document.documentElement.lang === "en" ? "en" : "ko";
-  const headEl = document.getElementById("curri-head");
-  const bodyEl = document.getElementById("curri-body");
-  if (!headEl || !bodyEl) return;
-  headEl.innerHTML = headers[lang].map(h => `<th>${h}</th>`).join("");
-  bodyEl.innerHTML = curriculum.map(row => `
-    <tr>
-      <td class="wk">W${row.wk}</td>
-      <td class="topic">${row[lang][0]}</td>
-      <td class="goal">${row[lang][1]}</td>
-      <td class="act">${row[lang][2]}</td>
-    </tr>
-  `).join("");
-}
-
-/* ============================================================================
    LANGUAGE TOGGLE
    ============================================================================ */
 const btnKo = document.getElementById("btn-ko");
@@ -1874,9 +3037,8 @@ function setLang(lang) {
   btnKo.classList.toggle("active", lang === "ko");
   btnEn.classList.toggle("active", lang === "en");
   document.title = lang === "ko"
-    ? "MATRIX AI Lab — 서울외국인학교"
-    : "MATRIX AI Lab — Seoul Foreign School";
-  renderCurriculum();
+    ? "MATRIX AI Lab · 서울외국인학교"
+    : "MATRIX AI Lab · Seoul Foreign School";
   try { localStorage.setItem("matrix-lang", lang); } catch(e) {}
 }
 
@@ -1906,7 +3068,7 @@ document.querySelectorAll(".reveal").forEach(el => revealIo.observe(el));
 /* ============================================================================
    ACTIVE NAV HIGHLIGHT
    ============================================================================ */
-const sectionIds = ["mission", "approach", "curriculum", "tracks", "library", "faq"];
+const sectionIds = ["mission", "philosophy", "builders-practice", "approach", "curriculum", "activities", "tracks", "library", "why-now", "team", "partners", "faq"];
 const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 const navLinks = document.querySelectorAll(".nav a[href^='#']");
 const navIo = new IntersectionObserver((entries) => {
