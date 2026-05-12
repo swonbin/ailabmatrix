@@ -1890,6 +1890,43 @@ html[lang="ko"] .tier-body { font-family: var(--sans-ko); font-size: 15px; line-
   max-width: 70ch;
 }
 
+.realistic-commitment {
+  margin-top: clamp(36px, 5vw, 56px);
+  padding: clamp(28px, 4vw, 44px);
+  border: 1px solid var(--ink);
+  background: var(--bg-2);
+  position: relative;
+}
+.realistic-commitment::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0;
+  width: 80px; height: 3px;
+  background: var(--accent);
+}
+.rc-head {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 18px;
+}
+.rc-line {
+  font-family: var(--serif);
+  font-size: clamp(15.5px, 1.6vw, 18px);
+  line-height: 1.6;
+  color: var(--ink);
+  max-width: 70ch;
+  margin-bottom: 14px;
+}
+.rc-line:last-child { margin-bottom: 0; }
+.rc-line-muted { color: var(--ink-2); font-size: clamp(14px, 1.4vw, 15.5px); }
+html[lang="ko"] .rc-line {
+  font-family: var(--sans-ko);
+  font-weight: 400;
+}
+
 /* ============================================================================
    REVEAL ON SCROLL
    ============================================================================ */
@@ -2025,7 +2062,7 @@ html[lang="en"] body { font-family: var(--sans); }
       </div>
       <div class="stat">
         <div class="stat-value">12<span style="font-size:0.6em; color:var(--ink-3);">wk</span></div>
-        <div class="stat-label"><span data-lang="ko">학기당 사이클</span><span data-lang="en">Weeks per cycle</span></div>
+        <div class="stat-label"><span data-lang="ko">한 사이클의 길이</span><span data-lang="en">Term-length cycle</span></div>
       </div>
       <div class="stat">
         <div class="stat-value">3</div>
@@ -2033,7 +2070,7 @@ html[lang="en"] body { font-family: var(--sans); }
       </div>
       <div class="stat">
         <div class="stat-value">100<span style="font-size:0.6em; color:var(--ink-3);">%</span></div>
-        <div class="stat-label"><span data-lang="ko">공개 라이선스</span><span data-lang="en">Open-licensed work</span></div>
+        <div class="stat-label"><span data-lang="ko">멤버 이름의 작업</span><span data-lang="en">Member-signed work</span></div>
       </div>
     </div>
 
@@ -2064,12 +2101,12 @@ html[lang="en"] body { font-family: var(--sans); }
           <span data-lang="en">Mission · Now</span>
         </div>
         <h3 class="mv-statement">
-          <span class="lang-ko lang-block">AI에 대한 <em>호기심에서 출발해,</em> 함께 읽고 토론하고 만들어, <em>공개한다.</em></span>
-          <span class="lang-en lang-block">To start from <em>curiosity about AI,</em> read and debate and build together, and <em>publish what we make.</em></span>
+          <span class="lang-ko lang-block">AI를 <em>사용자가 아니라 builder의 시각</em>에서 이해할 수 있도록 돕는다.</span>
+          <span class="lang-en lang-block">Help members understand AI from the <em>builder's side</em> instead of just the user's side.</span>
         </h3>
         <p class="mv-body">
-          <span data-lang="ko">MATRIX는 AI를 더 깊게 알고 싶은 SFS 학생들의 모임입니다. 우리는 매주 모여 관심 있는 주제를 발제하고 토론하며, 작은 실험과 프로젝트를 자기주도적으로 끌고 갑니다. 분석할 일이 있으면 수학을 빌리고, 검증할 일이 있으면 코드를 빌리고, 설명할 일이 있으면 글과 발표를 빌립니다. 도구는 질문을 따라옵니다, 그 반대가 아닙니다. 학기마다 적어도 하나의 공개 산출물을 Archive에 남기고, 그렇게 학습이 사라지지 않고 누적되는 구조를 만듭니다.</span>
-          <span data-lang="en">MATRIX is a community of SFS students who want to understand AI more deeply. We meet weekly to present and debate the topics we are curious about, and we run small experiments and projects in a self-directed way. When something needs analysis we borrow mathematics; when something needs verification we borrow code; when something needs explaining we borrow writing and talks. The tools follow the question, never the other way around. Each semester we commit at least one public artifact to the Archive, so that learning compounds rather than disappears.</span>
+          <span data-lang="ko">MATRIX AI Lab은 AI에 호기심을 가진 서울외국인학교 학생들의 학생 주도 커뮤니티입니다. 우리의 목표는 단순합니다. 멤버가 AI를 단순한 사용자가 아니라 builder의 시각에서 이해할 수 있도록 돕는 것. 매 모임마다 learn–build–share 사이클이 돌아갑니다. 함께 시도해 보고, 자기만의 작은 프로젝트를 만들고, 만든 것을 공유합니다. 멤버가 공개에 동의한 작업물은 클럽 Instagram, YouTube, 웹사이트에 남습니다. 한 해 동안 배운 것이 사라지지 않고 다음 사람에게 쓸모 있게 남는 것이 목표입니다.</span>
+          <span data-lang="en">MATRIX AI Lab is a student-led community at Seoul Foreign School for students curious about AI. Our goal is simple: help members understand AI from the builder's side instead of just the user's side. We do this through a learn–build–share cycle that runs through each meeting. Members try things together, build their own small projects, and share what they make. The work that members agree to make public lives on our Instagram, YouTube, and website. The aim is that what we learn stays useful instead of disappearing at the end of the year.</span>
         </p>
       </article>
 
@@ -2079,12 +2116,12 @@ html[lang="en"] body { font-family: var(--sans); }
           <span data-lang="en">Vision · 5 Years Out</span>
         </div>
         <h3 class="mv-statement">
-          <span class="lang-ko lang-block">한국 고등학생이 <em>세계 AI 연구의 입구</em>에 서는 곳. 우리가 던진 질문이 <em>다음 세대가 이어 쓸 수 있는 기록</em>이 되는 곳.</span>
-          <span class="lang-en lang-block">A place where Korean high-school students stand at <em>the entrance of global AI research.</em> A place where the questions we ask <em>become a record the next cohort can build on.</em></span>
+          <span class="lang-ko lang-block">SFS 학생이 <em>천천히, 꾸준히</em> 자라는 자리.<br>한 학번이 졸업하면, <em>다음 학번이 이어 쓰는 자리.</em></span>
+          <span class="lang-en lang-block">A place where SFS students grow <em>steadily, not in a hurry.</em><br>Where one cohort hands off to the <em>next.</em></span>
         </h3>
         <p class="mv-body">
-          <span data-lang="ko">우리의 장기 목표는 학생들의 호기심이 시간 순으로 누적되는 공개 기록이 되는 것입니다. 질문, 실험, 수정, 설명, 기여가 시간 순으로 남아 다음 학번이 이어 쓸 수 있는 형태. transformer, interpretability, alignment 같은 최전선 주제를 한국 고등학교 환경의 학생이 진지하게, 그러나 즐겁게, 다룰 수 있다는 것을 증명하는 것이 우리의 야심입니다.</span>
-          <span data-lang="en">Our long-term aim is to make student curiosity compound rather than disappear, a public record of questions, experiments, revisions, explanations, and contributions, in time order, for the next cohort to build on. Our ambition is to show that students in a Korean high school can take the frontier, transformers, interpretability, alignment, seriously, and have fun with it.</span>
+          <span data-lang="ko">MATRIX가 SFS 안에서 AI에 호기심을 가진 학생들이 꾸준히 자라는 자리가 되기를 바랍니다. 9학년에 들어온 멤버가 졸업할 때쯤이면, 실제로 무언가를 만들어 본 사람, 후배에게 가르쳐 본 사람, 그리고 다음 학번이 이어 쓸 수 있는 작업물을 남긴 사람이 되어 있도록. 장기적 목표는 클럽이 한 학번에 묶이지 않고 세대를 넘어 이어지는 것입니다. cohort handoff가 처음부터 설계되어 있습니다. 5년 후, SFS 커뮤니티에 학생들의 AI 작업이 작지만 살아있는 archive로 남아 있기를 바랍니다.</span>
+          <span data-lang="en">We hope MATRIX becomes a place where SFS students who are curious about AI can grow steadily, not in a hurry. A place where members who join as ninth-graders graduate as people who have built real things, taught younger students, and left work behind for the next group. The long-term aim is that the club outlasts each generation, with cohort handoff built in from the start. Five years from now, we hope the SFS community has a small but living archive of student AI work that future members can build on.</span>
         </p>
       </article>
     </div>
@@ -2162,8 +2199,8 @@ html[lang="en"] body { font-family: var(--sans); }
         <span data-lang="en">Signature</span>
       </div>
       <p class="recursion-line">
-        <span data-lang="ko">매년 모든 활동 멤버는, 사전 코딩 경험과 무관하게, 자신만의 자동화 프로젝트를 하나 이상 출시합니다. 수학, 언어학, 철학에서 시작한 멤버에게도 vibe coding 도구가 그 길을 열어줍니다. 3년 전에는 존재하지 않던 구조적 기회입니다.</span>
-        <span data-lang="en">Every active member ships at least one personal automation project per year, regardless of prior coding background. Vibe coding tools have made this accessible to members whose entry point is mathematics, linguistics, or philosophy rather than CS. A structural opportunity that did not exist three years ago.</span>
+        <span data-lang="ko">매년 모든 활동 멤버가, 사전 코딩 경험과 무관하게, 자신이 직접 쓸 작은 자동화 프로젝트를 하나 이상 만들어 보는 것을 권장합니다. 수학, 언어학, 철학에서 시작한 멤버에게도 vibe coding 도구가 그 길을 열어줍니다. 3년 전에는 존재하지 않던 구조적 기회입니다.</span>
+        <span data-lang="en">Every active member is encouraged to make at least one small project per year that they personally use, regardless of prior coding background. Vibe coding tools have made this accessible to members whose entry point is mathematics, linguistics, or philosophy rather than CS. A structural opportunity that did not exist three years ago.</span>
       </p>
     </div>
   </div>
@@ -2268,8 +2305,8 @@ html[lang="en"] body { font-family: var(--sans); }
           <span class="lang-en lang-block">What we<br><em>actually do</em> each week.</span>
         </h2>
         <p class="section-lede">
-          <span data-lang="ko">미션이 추상이라면, 아래 네 가지는 매주 실제로 작동하는 습관입니다, 묻고, 함께 읽고, 직접 만들고, 남깁니다. 평가는 출석이 아닌, 호기심의 깊이, 토론의 질, 실험의 재현성, 설명력, 으로 합니다.</span>
-          <span data-lang="en">Where the mission is abstract, the four habits below are what actually runs each week, we ask, we read together, we build it ourselves, we leave a record. We assess on the depth of curiosity, the quality of debate, the reproducibility of experiments, and clarity of explanation, not attendance.</span>
+          <span data-lang="ko">미션이 추상이라면, 아래 네 가지는 매주 실제로 작동하는 습관입니다. 묻고, 함께 읽고, 직접 만들고, 남깁니다. 우리가 중요하게 보는 것은 호기심의 깊이, 대화의 질, 그리고 만든 것이 실제로 작동하는지 입니다. 출석은 측정 기준이 아닙니다.</span>
+          <span data-lang="en">Where the mission is abstract, the four habits below are what actually runs each week. We ask, we read together, we build it ourselves, we leave a record. What we care about is the depth of curiosity, the quality of conversation, and whether what we made actually works. We do not track attendance as a measure.</span>
         </p>
       </div>
     </div>
@@ -2506,7 +2543,7 @@ html[lang="en"] body { font-family: var(--sans); }
         <div class="activity-tag activity-tag-p0">P0 · <span data-lang="ko">필수</span><span data-lang="en">Core</span></div>
         <div class="activity-cadence"><span data-lang="ko">학기당 1회</span><span data-lang="en">Once per term</span></div>
         <h3 class="activity-name"><span data-lang="ko">MATRIX Symposium</span><span data-lang="en">MATRIX Symposium</span></h3>
-        <p class="activity-desc"><span data-lang="ko">학기 중 8-10명의 멤버가 12분 발표 + 5분 Q&amp;A. 외부 게스트(KAIST/SNU 대학원생)가 Zoom 패널로 참여. 청중 투표로 "Most Asked-About Question" 시상. 모든 발표 영상이 1주일 안에 Library에 업로드.</span><span data-lang="en">Eight to ten members deliver 12-minute talks with five-minute Q&amp;A. An external researcher joins by Zoom as panelist. Audience votes on a "Most Asked-About Question" award. Every talk lands in the Library within a week.</span></p>
+        <p class="activity-desc"><span data-lang="ko">학기 중 발표를 원하는 멤버 4-6명이 7분 발표 + 3분 Q&amp;A. SFS 수학 또는 컴퓨터과학 교사가 discussant로 참여하고, 외부 강연자가 가능한 경우 Zoom으로 합류합니다. 피자가 제공됩니다. 발제자의 동의가 있는 영상은 1주일 안에 Library, YouTube, Instagram에 업로드됩니다.</span><span data-lang="en">Four to six members who want to share their work give short seven-minute talks with three-minute Q&amp;A. A SFS Mathematics or Computer Science teacher joins as discussant; if a guest speaker is available, they join by Zoom. Pizza is served. With each presenter's permission, talks are filmed and added to the club Archive, YouTube, and Instagram within a week.</span></p>
       </article>
 
       <article class="activity">
@@ -2524,17 +2561,17 @@ html[lang="en"] body { font-family: var(--sans); }
       </article>
 
       <article class="activity">
-        <div class="activity-tag activity-tag-p1">P1 · <span data-lang="ko">발전</span><span data-lang="en">Pursued</span></div>
+        <div class="activity-tag activity-tag-p0">P0 · <span data-lang="ko">필수</span><span data-lang="en">Core</span></div>
         <div class="activity-cadence"><span data-lang="ko">학기당 4회</span><span data-lang="en">Four times per term</span></div>
         <h3 class="activity-name"><span data-lang="ko">Middle School Bridge</span><span data-lang="en">Middle School Bridge</span></h3>
-        <p class="activity-desc"><span data-lang="ko">MATRIX 멤버가 SFS 중학생(G6-G8) 대상으로 30분 워크샵. 주제: "AI는 어떻게 글을 쓸까", "왜 AI는 손가락을 못 그리나", "수학 없이 신경망 이해하기". 짧고 인터랙티브한 데모 위주. SFS의 어떤 클럽도 cross-divisional teaching을 하지 않습니다.</span><span data-lang="en">MATRIX members run 30-minute workshops for SFS Middle School students (G6–G8). Topics like "How AI writes," "Why AI struggles with hands," "Neural networks without the math." Short, hands-on, demo-driven. No other SFS club operates a cross-divisional teaching pipeline.</span></p>
+        <p class="activity-desc"><span data-lang="ko">MATRIX 멤버가 SFS 중학생(G6-G8) 대상으로 30분 워크샵을 진행합니다. 주제: "AI는 어떻게 글을 쓸까", "왜 AI는 손가락을 못 그리나", "수학 없이 신경망 이해하기". 짧고 인터랙티브한 데모 위주. 모든 일정과 내용은 사전에 중학교 교사진과 조율됩니다. SFS Middle School은 현재 학업에서의 AI 사용을 허용하지 않으므로, 워크샵은 개념 이해, AI의 한계 사례, 비판적 사고에 초점을 둡니다. 학교 정책이 제한하는 시기 동안 학업적 AI 사용을 권장하지 않습니다.</span><span data-lang="en">MATRIX members run 30-minute workshops for SFS Middle School students (G6–G8). Topics like "How AI writes," "Why AI struggles with hands," "Neural networks without the math." Short, hands-on, demo-driven. All sessions are coordinated in advance with Middle School teachers and staff. SFS Middle School currently does not permit AI use in academics, so workshops focus on concepts, examples of where AI fails, and critical thinking. We do not promote academic AI use during the period that school policy restricts it.</span></p>
       </article>
 
       <article class="activity">
         <div class="activity-tag activity-tag-p1">P1 · <span data-lang="ko">발전</span><span data-lang="en">Pursued</span></div>
         <div class="activity-cadence"><span data-lang="ko">분기당 1회</span><span data-lang="en">Quarterly</span></div>
         <h3 class="activity-name"><span data-lang="ko">External Sprints &amp; Hackathons</span><span data-lang="en">External Sprints &amp; Hackathons</span></h3>
-        <p class="activity-desc"><span data-lang="ko">Apart Research alignment sprints (분기 1회, 무료, 온라인, 클럽 전원 참여 권장), MIT Global AI Hackathon (연 1회, 무료, 온라인, 팀 1-2개 출전), 한국 hackathon들 (선발 1팀). Builder 트랙 멤버에게 외부 검증 가능한 결과물을 만드는 경로.</span><span data-lang="en">Apart Research alignment sprints (quarterly, free, online, open to the whole club), MIT Global AI Hackathon (annual, free, virtual, one or two teams), Korean hackathons (one selected team). For Builder-track members, a route to externally verifiable output.</span></p>
+        <p class="activity-desc"><span data-lang="ko">멤버 개인이 관심 있는 외부 hackathon, alignment sprint, AI 대회에 적극 참여하길 권장합니다. 클럽 차원에서 좋은 기회들을 함께 큐레이션하고, 팀 구성과 사전 준비, 발표 리허설을 돕습니다. 외부에서 검증 가능한 결과물을 쌓고 싶은 멤버에게 열린 경로입니다. 단, 클럽 운영 자체가 외부 행사에 의존하지는 않습니다. 참가는 멤버 본인의 선택입니다.</span><span data-lang="en">We actively encourage members to enter external hackathons, alignment sprints, and AI competitions on their own. The club curates good opportunities together, helps with team formation, prep, and rehearsal. For members who want externally verifiable work, this is an open path. The club itself does not depend on these. Participation is up to each member.</span></p>
       </article>
     </div>
 
@@ -2584,7 +2621,7 @@ html[lang="en"] body { font-family: var(--sans); }
       <article class="track">
         <div class="role">Track 03 · Researcher</div>
         <h4>Researcher</h4>
-        <p><span data-lang="ko">학기 단위 프로젝트, 보고서, 발표를 묶어 낸다. 멘토링, 재현 실험, peer review가 기본 단위입니다. 외부 발표와 대학 포트폴리오 제출의 가장 강한 후보 작업이 여기서 나옵니다.</span><span data-lang="en">A semester-long project, bundled with a written report and a talk. Mentoring, replication, and peer review are the units of work. The strongest portfolio submissions for external venues and college applications come from this track.</span></p>
+        <p><span data-lang="ko">학기 단위 프로젝트를 짧은 보고서와 (멤버가 원할 경우) 발표로 마무리합니다. 가장 깊이 있게 일하고 싶은 멤버가 이 트랙에서 일합니다. 선택은 본인의 관심과 시간에 따라 스스로 결정합니다.</span><span data-lang="en">A semester-long project, with a short written report and a talk if the member chooses. The most committed members work in this track. Selection is self-determined based on interest and time.</span></p>
         <ul>
           <li><span data-lang="ko">학기 프로젝트 1건</span><span data-lang="en">One semester project</span></li>
           <li><span data-lang="ko">1,000–1,500단어 보고서</span><span data-lang="en">1,000–1,500 word report</span></li>
@@ -2595,22 +2632,18 @@ html[lang="en"] body { font-family: var(--sans); }
 
     <!-- Faculty advisor block — institutional gravity -->
     <div class="advisor">
-      <div class="advisor-quote">
-        <span data-lang="ko">"학생이 자기 호기심으로 질문을 만들고, 자기 손으로 답을 찾고, 자기 이름으로 결과를 남길 때, 그것이 우리가 학생들에게 줄 수 있는 가장 정직한 출발점이다."</span>
-        <span data-lang="en">"When a student frames their own question, finds their own answer, and signs their own name to the result, that is the most honest starting point we can give them."</span>
-      </div>
       <div class="advisor-meta">
         <div class="eyebrow" style="margin-bottom: 12px;">
           <span data-lang="ko">지도교사</span>
           <span data-lang="en">Faculty Advisor</span>
         </div>
         <div class="advisor-name">
-          <span data-lang="ko">서울외국인학교 교사진</span>
-          <span data-lang="en">Seoul Foreign School Faculty</span>
+          <span data-lang="ko">결정 중</span>
+          <span data-lang="en">To be confirmed</span>
         </div>
         <div class="advisor-role">
-          <span data-lang="ko">MATRIX는 SFS High School 학생들이 자율적으로 운영하며, 학교 교사진의 자문을 받습니다.</span>
-          <span data-lang="en">MATRIX is run by SFS High School students with advisory support from school faculty.</span>
+          <span data-lang="ko">MATRIX는 SFS High School 학생들이 자율적으로 운영하며, 학교 교사진의 자문을 받습니다. 클럽 승인 전 수학 또는 컴퓨터과학과 교사 중에서 지도교사가 확정될 예정입니다.</span>
+          <span data-lang="en">MATRIX is run by SFS High School students with advisory support from school faculty. Our faculty advisor is to be confirmed prior to club approval, likely from the Mathematics or Computer Science department.</span>
         </div>
         <div class="advisor-aff">
           <span data-lang="ko">Seoul Foreign School · 서울특별시 서대문구</span>
@@ -2746,7 +2779,7 @@ html[lang="en"] body { font-family: var(--sans); }
         <div class="gap-num">Gap 02</div>
         <div class="gap-content">
           <h3 class="gap-title"><span data-lang="ko">탐구의 판이 없으면 builder도 자라지 않는다.</span><span data-lang="en">Without a place to try things, no one becomes a builder.</span></h3>
-          <p class="gap-body"><span data-lang="ko">AI의 builder나 researcher가 되기 위해서는 자기 관심 분야를 직접 골라 탐구하고, 친구들과 의견을 나누고, 작은 실험을 끝까지 끌고 가 보는 경험이 필요합니다. 호기심을 발전시키고, 부담 없이 실패해 보고, 기회를 부여받고, 옆에서 같이 배우는 또래가 있는 자리. 그런 판이 깔려 있지 않으면 학생은 흥미만 가진 채로 학년을 넘기게 됩니다. MATRIX는 그 판을 깔아 멤버 각자가 builder와 researcher의 경로로 자라나도록 돕습니다.</span><span data-lang="en">Becoming an AI builder or researcher takes a place to choose your own area, try things in it, talk them through with peers, and carry small experiments through to the end. A place where curiosity can grow, where it is safe to fail, where chances are offered, where there are peers learning beside you. Without that, students simply move up a grade still holding only the interest. MATRIX is built to be that place, so each member can grow along the builder and researcher paths.</span></p>
+          <p class="gap-body"><span data-lang="ko">AI의 builder나 researcher가 되기 위해서는 자기 관심 분야를 직접 골라 탐구하고, 친구들과 의견을 나누고, 작은 실험을 끝까지 끌고 가 보는 경험이 필요합니다. 호기심을 발전시키고, 부담 없이 실패해 보고, 기회를 부여받고, 옆에서 같이 배우는 또래가 있는 자리. 그런 판이 깔려 있지 않으면 학생은 흥미만 가진 채로 학년을 넘기게 됩니다. MATRIX는 그 판을 깔아 멤버 각자가 builder와 researcher의 경로로 자라나도록 돕습니다. 같은 빈자리가 중학교에도 존재합니다. SFS Middle School은 현재 학업에서 AI 사용을 허용하지 않지만, 그 학생들은 곧 AI literacy를 피할 수 없는 세상으로 들어옵니다. MATRIX의 Middle School Bridge 프로그램이 이 빈자리를, 중학교 교사진과의 협력 안에서, 채우려고 합니다.</span><span data-lang="en">Becoming an AI builder or researcher takes a place to choose your own area, try things in it, talk them through with peers, and carry small experiments through to the end. A place where curiosity can grow, where it is safe to fail, where chances are offered, where there are peers learning beside you. Without that, students simply move up a grade still holding only the interest. MATRIX is built to be that place, so each member can grow along the builder and researcher paths. The same gap exists in Middle School. SFS Middle School currently does not allow AI use in academics, but those students will soon enter a world where AI literacy is unavoidable. MATRIX's Middle School Bridge program is built to address this specific gap, in coordination with Middle School teachers and staff.</span></p>
         </div>
       </article>
 
@@ -2791,10 +2824,10 @@ html[lang="en"] body { font-family: var(--sans); }
 
       <article class="team-card">
         <div class="team-role"><span data-lang="ko">부회장 · No 2</span><span data-lang="en">Vice President · No 2</span></div>
-        <h3 class="team-name">Liam Yoon</h3>
+        <h3 class="team-name">Eugene Jeong</h3>
         <p class="team-focus"><span data-lang="ko">회장과 긴밀히 협력하여 이벤트를 함께 기획·운영하고, 외부 강연 outreach를 함께 짭니다. 회장 부재 시 리더십 포지션. Symposium, Showcase, Build Day 운영의 공동 책임자.</span><span data-lang="en">Works closely with the President to plan and run events and shape speaker outreach together. Steps into the leadership role when the President is unavailable. Co-owns Symposium, Showcase, and Build Day operations.</span></p>
-        <a class="team-email" href="mailto:liam.yoon.28@seoulforeign.org">
-          <span class="team-email-addr">liam.yoon.28@seoulforeign.org</span>
+        <a class="team-email" href="mailto:eugene.jeong.28@seoulforeign.org">
+          <span class="team-email-addr">eugene.jeong.28@seoulforeign.org</span>
         </a>
       </article>
 
@@ -2870,16 +2903,18 @@ html[lang="en"] body { font-family: var(--sans); }
         </p>
       </article>
 
-      <article class="tier">
-        <div class="tier-head">
-          <div class="tier-num">Path 04</div>
-          <div class="tier-name"><span data-lang="ko">장기적 목표</span><span data-lang="en">Long-term aspiration</span></div>
-        </div>
-        <p class="tier-body">
-          <span data-lang="ko">시간이 지나 클럽이 자리를 잡고 공개 결과물이 쌓이면, 한국 안팎의 연구 기관에 정식 컨택을 시도해 볼 만하다고 봅니다. 무엇이 가능할지는 그때 가서 정직하게 보겠습니다, 지금은 약속하지 않습니다.</span>
-          <span data-lang="en">In time, once the club has settled and a body of public work has accumulated, formal outreach to research institutions in Korea and abroad becomes worth attempting. We will see honestly what is possible then, we are not promising it now.</span>
-        </p>
-      </article>
+    </div>
+
+    <div class="realistic-commitment">
+      <div class="rc-head"><span data-lang="ko">현실적인 약속</span><span data-lang="en">A realistic commitment</span></div>
+      <p class="rc-line">
+        <span data-lang="ko">학기당 외부 강연 1회를 목표로 합니다. 만약 한 학기 outreach가 확정 강연으로 이어지지 않더라도 학기 계획은 흔들리지 않습니다. 그 자리는 멤버들이 직접 운영합니다, 한 편의 논문이나 그룹 프로젝트를 함께 끝까지 다루는 자리로 대체됩니다.</span>
+        <span data-lang="en">We aim for one outside engagement per term through one of the three paths above. If a term's outreach does not produce a confirmed speaker, our plan does not depend on it. Members run that session themselves, working through a paper or a group project together instead.</span>
+      </p>
+      <p class="rc-line rc-line-muted">
+        <span data-lang="ko">현재 시점에서 위 세 경로 외의 파트너십은 약속하지 않습니다. 연구 기관이나 회사를 통한 outreach는 우리가 아직 만들지 못한 관계와 학생 작업물의 누적이 필요합니다.</span>
+        <span data-lang="en">We are not promising partnerships beyond these three paths at this time. Outreach to research institutions or companies would require relationships we do not yet have and a body of student work we have not yet built.</span>
+      </p>
     </div>
 
     <p class="partners-note">
@@ -2927,7 +2962,7 @@ html[lang="en"] body { font-family: var(--sans); }
       </details>
       <details>
         <summary><span data-lang="ko">대입 포트폴리오로 제출해도 되나요?</span><span data-lang="en">Can I submit this work to college applications?</span></summary>
-        <p><span data-lang="ko">가능합니다. 다만 대학별 정책이 다르므로, 의미 있고 지원 맥락에 직접 관련 있는 작업만 선별해 넣는 편을 권합니다. MIT는 research·maker 포트폴리오를 optional material로 받습니다. 링크는 많을수록 좋은 것이 아니라 강할수록 좋습니다.</span><span data-lang="en">Yes, within each university's policy. We recommend submitting only work that is substantial and directly relevant to your application. MIT, for instance, accepts research and maker portfolios as optional material. Stronger links beat more links.</span></p>
+        <p><span data-lang="ko">됩니다. MATRIX에서 만든 작업은 본인의 것이고, 지원서, 포트폴리오, 어디에든 자유롭게 포함할 수 있습니다. 우리는 그런 목적으로 클럽을 운영하지는 않지만, 멤버들이 만든 작업이 자연스럽게 그런 자리에서 쓸모 있게 되는 것은 환영합니다.</span><span data-lang="en">Yes. Work you make in MATRIX is yours, and you can include it in applications, portfolios, or anywhere else. We do not run the club for that purpose, but the work members make can naturally be useful for it.</span></p>
       </details>
       <details>
         <summary><span data-lang="ko">학년 제한이 있나요?</span><span data-lang="en">Are there grade restrictions?</span></summary>
